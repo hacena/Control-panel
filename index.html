@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصفحة الرئيسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #E3F2FD, #FFEBEE);
+            color: #333;
+            direction: rtl;
+            text-align: right;
+        }
+
+        header {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.5rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            background: #FFF;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #4CAF50;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #4CAF50;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #555;
+        }
+
+        .hero button {
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #388E3C;
+        }
+
+        .landing-section {
+            padding: 40px 20px;
+            background: #FFF;
+            margin: 30px auto;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .landing-section h2 {
+            font-size: 1.8rem;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .landing-section p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .landing-section .cta {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .landing-section .cta a {
+            text-decoration: none;
+            background-color: #FF5722;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .landing-section .cta a:hover {
+            background-color: #E64A19;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        مرحبًا بكم في تطبيقنا
+    </header>
+
+    <nav>
+        <a href="register.html">التسجيل</a>
+        <a href="login.html">تسجيل الدخول</a>
+        <a href="sales.html">صفحة البيع</a>
+        <a href="support.html">الدعم</a>
+    </nav>
+
+    <section class="hero">
+        <h1>أهلاً بك في أفضل منصة للتسوق!</h1>
+        <p>سجّل الآن وابدأ رحلتك في عالم التسوق السريع والآمن.</p>
+        <button onclick="window.location.href='register.html'">ابدأ الآن</button>
+    </section>
+
+    <section class="landing-section">
+        <h2>ما هو تطبيقنا؟</h2>
+        <p>تطبيقنا يوفر لك تجربة تسوق مريحة وسريعة مع مجموعة متنوعة من المنتجات والخدمات المصممة خصيصًا لتلبية احتياجاتك.</p>
+        <div class="cta">
+            <a href="register.html">نعم، أريد شراء التطبيق</a>
+        </div>
+    </section>
+
+    <section class="landing-section">
+        <h2>مميزات التطبيق</h2>
+        <p>واجهة سهلة الاستخدام، دعم فني متواصل، وأسعار تنافسية لجميع المنتجات والخدمات.</p>
+        <div class="cta">
+            <a href="register.html">نعم، أريد شراء التطبيق</a>
+        </div>
+    </section>
+
+    <section class="landing-section">
+        <h2>ابدأ الآن</h2>
+        <p>انضم إلى آلاف المستخدمين الذين يستمتعون بخدماتنا المميزة وابدأ تجربتك الآن.</p>
+        <div class="cta">
+            <a href="register.html">نعم، أريد شراء التطبيق</a>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2024 جميع الحقوق محفوظة
+    </footer>
+</body>
+</html>
