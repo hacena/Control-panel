@@ -24,74 +24,25 @@
             font-size: 1.5rem;
         }
 
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
             background: #FFF;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #4CAF50;
-        }
-
-        .hero {
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            padding: 50px 20px;
         }
 
-        .hero h1 {
-            font-size: 2.5rem;
+        h1 {
+            font-size: 2rem;
             color: #4CAF50;
         }
 
-        .hero p {
+        p {
             font-size: 1.2rem;
-            margin-top: 10px;
             color: #555;
-        }
-
-        .hero button {
-            margin-top: 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .hero button:hover {
-            background-color: #388E3C;
-        }
-
-        .video-section {
-            text-align: center;
-            margin: 30px auto;
-        }
-
-        .video-section video {
-            width: 80%;
-            max-width: 700px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .email-section {
-            text-align: center;
-            margin: 30px auto;
+            margin-bottom: 20px;
         }
 
         .email-btn {
@@ -109,9 +60,40 @@
             background: #388E3C;
         }
 
-        footer {
-            margin-top: 50px;
+        .hero {
+            margin: 30px auto;
             text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            color: #4CAF50;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .hero .cta-btn {
+            margin-top: 10px;
+            display: inline-block;
+            background-color: #FF5722;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-decoration: none;
+        }
+
+        .hero .cta-btn:hover {
+            background-color: #E64A19;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
             font-size: 1rem;
             color: #777;
         }
@@ -121,32 +103,31 @@
 </head>
 <body>
     <header>
-        مرحبًا بكم في تطبيقنا
+        الصفحة الرئيسية
     </header>
 
-    <nav>
-        <a href="register.html">التسجيل</a>
-        <a href="login.html">تسجيل الدخول</a>
-        <a href="sale.html">صفحة البيع</a>
-        <a href="support.html">الدعم</a>
-    </nav>
+    <div class="container">
+        <h1>مرحبًا بك في تطبيقنا!</h1>
+        <p>يمكنك التواصل معنا عبر البريد الإلكتروني بسرعة وسهولة.</p>
+        <button onclick="sendEmail()" class="email-btn">أرسل رسالة عبر البريد</button>
+    </div>
 
     <section class="hero">
         <h1>أهلاً بك في أفضل منصة للتسوق!</h1>
         <p>سجّل الآن وابدأ رحلتك في عالم التسوق السريع والآمن.</p>
-        <button onclick="window.location.href='register.html'">ابدأ الآن</button>
+        <a href="sale.html" class="cta-btn">نعم، أريد شراء التطبيق</a>
     </section>
 
-    <section class="video-section">
-        <video controls>
-            <source src="video.mp4" type="video/mp4">
-            المتصفح لا يدعم تشغيل الفيديو.
-        </video>
+    <section class="hero">
+        <h1>تجربة مستخدم فريدة!</h1>
+        <p>احصل على تجربة فريدة وآمنة في كل عملية شراء.</p>
+        <a href="sale.html" class="cta-btn">نعم، أريد شراء التطبيق</a>
     </section>
 
-    <section class="email-section">
-        <h2>تواصل معنا عبر البريد</h2>
-        <button onclick="sendEmail()" class="email-btn">أرسل رسالة عبر البريد</button>
+    <section class="hero">
+        <h1>دعم متواصل على مدار الساعة!</h1>
+        <p>نحن هنا لخدمتك والإجابة على جميع استفساراتك.</p>
+        <a href="sale.html" class="cta-btn">نعم، أريد شراء التطبيق</a>
     </section>
 
     <footer>
