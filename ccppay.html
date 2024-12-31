@@ -30,49 +30,11 @@
             border-radius: 8px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
         }
-        .product-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
         .product-info img {
             width: 250px;
             height: auto;
             border-radius: 8px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .payment-info {
-            background-color: #ecf0f1;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border: 1px solid #ddd;
-        }
-        .payment-info h3 {
-            color: #3498db;
-            margin-bottom: 15px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 5px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-            margin-bottom: 15px;
-            background-color: #fafafa;
-        }
-        input:focus, textarea:focus {
-            border-color: #3498db;
-            outline: none;
         }
         button {
             background-color: #3498db;
@@ -123,42 +85,24 @@
 
 <div class="container">
     <h2>معلومات المنتج</h2>
-    <div class="product-info">
-        <img src="product-image.jpg" alt="صورة المنتج">
-        <div>
-            <h3>اسم المنتج</h3>
-            <p>هو تطبيق لإجراء المعاملات المالية بطريقة سلسة وآمنة.</p>
-            <p><strong>السعر: 2650 دينار جزائري</strong></p>
-        </div>
-    </div>
-
-    <div class="payment-info">
-        <h3>تعليمات الدفع</h3>
-        <p>لإتمام عملية الشراء، يرجى تحويل المبلغ إلى الحساب البريدي:</p>
-        <p><strong>رقم الحساب:</strong> 4264232/64</p>
-        <p><strong>اسم صاحب الحساب:</strong> عاتق حسان</p>
-    </div>
+    <img src="product-image.jpg" alt="صورة المنتج">
+    <p>السعر: 2650 دينار جزائري</p>
 
     <h2>تأكيد الدفع</h2>
     <form id="payment-form">
-        <div class="form-group">
+        <div>
             <label for="transaction-id">رقم المعاملة:</label>
             <input type="text" id="transaction-id" name="transaction-id" required>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="amount-paid">المبلغ المدفوع:</label>
             <input type="number" id="amount-paid" name="amount-paid" required>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="payment-date">تاريخ الدفع:</label>
             <input type="date" id="payment-date" name="payment-date" required>
-        </div>
-
-        <div class="form-group">
-            <label for="comments">تعليقات إضافية:</label>
-            <textarea id="comments" name="comments" rows="4"></textarea>
         </div>
 
         <button type="submit">إرسال تأكيد الدفع</button>
@@ -175,8 +119,36 @@
     const form = document.getElementById('payment-form');
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('تم إرسال تأكيد الدفع بنجاح!');
-        form.reset();
+
+        // جمع بيانات النموذج
+        const transactionId = document.getElementById('transaction-id').value;
+        const amountPaid = document.getElementById('amount-paid').value;
+        const paymentDate = document.getElementById('payment-date').value;
+
+        // إرسال البيانات إلى خادم
+        fetch('https://your-backend-endpoint.com/verify-payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                transactionId,
+                amountPaid,
+                paymentDate,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('تم التحقق من الدفع بنجاح. شكراً!');
+                window.location.href = 'success.html';
+            } else {
+                alert('فشل التحقق من الدفع. الرجاء المحاولة مرة أخرى.');
+            }
+        })
+        .catch(error => {
+            alert('حدث خطأ أثناء التحقق. الرجاء المحاولة لاحقاً.');
+        });
     });
 </script>
 
