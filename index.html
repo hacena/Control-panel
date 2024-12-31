@@ -6,6 +6,7 @@
     <title>الصفحة الرئيسية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* إعدادات عامة */
         body {
             font-family: 'Cairo', sans-serif;
             margin: 0;
@@ -14,22 +15,18 @@
             color: #333;
             direction: rtl;
             text-align: right;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
         }
 
+        /* الهيدر (العنوان الرئيسي) */
         header {
-            background: #2196F3; /* تم تغيير اللون إلى الأزرق */
+            background: #2196F3; /* أزرق */
             color: white;
             text-align: center;
             padding: 15px 0;
             font-size: 1.5rem;
-            width: 100%;
         }
 
+        /* التنقل (القائمة العلوية) */
         nav {
             display: flex;
             justify-content: center;
@@ -37,7 +34,6 @@
             background: #FFF;
             padding: 10px;
             border-bottom: 1px solid #ddd;
-            width: 100%;
         }
 
         nav a {
@@ -49,18 +45,18 @@
         }
 
         nav a:hover {
-            color: #2196F3; /* تم تغيير اللون إلى الأزرق */
+            color: #2196F3; /* أزرق */
         }
 
+        /* الأقسام الرئيسية */
         .hero {
             text-align: center;
             padding: 50px 20px;
-            width: 100%;
         }
 
         .hero h1 {
             font-size: 2.5rem;
-            color: #2196F3; /* تم تغيير اللون إلى الأزرق */
+            color: #2196F3; /* أزرق */
         }
 
         .hero p {
@@ -71,7 +67,7 @@
 
         .hero button {
             margin-top: 20px;
-            background-color: #2196F3; /* تم تغيير اللون إلى الأزرق */
+            background-color: #2196F3; /* أزرق */
             color: white;
             border: none;
             padding: 10px 20px;
@@ -82,13 +78,13 @@
         }
 
         .hero button:hover {
-            background-color: #1976D2; /* تم تغيير اللون إلى الأزرق */
+            background-color: #1976D2; /* أزرق غامق */
         }
 
+        /* قسم الفيديو */
         .video-section {
             text-align: center;
             margin: 30px auto;
-            width: 100%;
         }
 
         .video-section video {
@@ -98,70 +94,71 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
+        /* زر البريد الإلكتروني */
+        .email-button {
+            display: block;
+            margin: 30px auto;
+            background-color: #2196F3; /* أزرق */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .email-button:hover {
+            background-color: #1976D2; /* أزرق غامق */
+        }
+
+        /* التذييل */
         footer {
             margin-top: 50px;
             text-align: center;
             font-size: 1rem;
             color: #777;
-            width: 100%;
-        }
-
-        button {
-            margin: 20px;
-            background-color: #2196F3; /* تم تغيير اللون إلى الأزرق */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .email-button {
-            margin-top: 30px;
-            background-color: #2196F3; /* تم تغيير اللون إلى الأزرق */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .email-button:hover {
-            background-color: #1976D2; /* تم تغيير اللون إلى الأزرق */
+            background: #f9f9f9;
+            padding: 10px 0;
         }
     </style>
 </head>
 <body>
+    <!-- الهيدر -->
     <header>
-        مرحبًا بكم في
-        تطبيق الدفع الإلكنروني
+        مرحبًا بكم في تطبيقنا
     </header>
 
+    <!-- شريط التنقل -->
     <nav>
         <a href="register.html">التسجيل</a>
-      
+        <a href="login.html">تسجيل الدخول</a>
+        <a href="sale.html">صفحة البيع</a>
         <a href="support.html">الدعم</a>
     </nav>
 
+    <!-- القسم الأول -->
     <section class="hero">
         <h1>أهلاً بك في أفضل منصة للتسوق!</h1>
         <p>سجّل الآن وابدأ رحلتك في عالم التسوق السريع والآمن.</p>
         <button onclick="window.location.href='sale.html'">نعم، أريد شراء التطبيق</button>
     </section>
 
+    <!-- القسم الثاني -->
     <section class="hero">
         <h1>تجربة تسوق آمنة وموثوقة</h1>
         <p>استمتع بتجربة شراء آمنة مع أفضل خدمات الدعم.</p>
         <button onclick="window.location.href='sale.html'">نعم، أريد شراء التطبيق</button>
     </section>
 
+    <!-- القسم الثالث -->
     <section class="hero">
         <h1>أسعار تنافسية وخدمات ممتازة</h1>
         <p>نضمن لك أفضل الأسعار وأعلى جودة.</p>
         <button onclick="window.location.href='sale.html'">نعم، أريد شراء التطبيق</button>
     </section>
 
+    <!-- قسم الفيديو -->
     <section class="video-section">
         <h2>شاهد الفيديو التوضيحي</h2>
         <video controls>
@@ -170,17 +167,18 @@
         </video>
     </section>
 
+    <!-- زر البريد الإلكتروني -->
     <button onclick="sendEmail()" class="email-button">
         أرسل رسالة عبر البريد
     </button>
 
+    <!-- التذييل -->
     <footer>
         &copy; 2024 جميع الحقوق محفوظة
     </footer>
 
     <script>
         function sendEmail() {
-            // سيتم تنفيذ الوظيفة هنا لإرسال البريد الإلكتروني
             window.location.href = "mailto:example@example.com?subject=استفسار&body=أرسل لي رسالتك هنا.";
         }
     </script>
