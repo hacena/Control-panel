@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <button onclick="sendEmail()" style="margin: 20px; background-color:يمكنك التواصل معنا بالبريد الإلكتروني #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
-    أرسل رسالة عبر البريد
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الصفحة الرئيسية</title>
@@ -16,6 +14,11 @@
             color: #333;
             direction: rtl;
             text-align: right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
 
         header {
@@ -24,6 +27,7 @@
             text-align: center;
             padding: 15px 0;
             font-size: 1.5rem;
+            width: 100%;
         }
 
         nav {
@@ -33,6 +37,7 @@
             background: #FFF;
             padding: 10px;
             border-bottom: 1px solid #ddd;
+            width: 100%;
         }
 
         nav a {
@@ -50,6 +55,7 @@
         .hero {
             text-align: center;
             padding: 50px 20px;
+            width: 100%;
         }
 
         .hero h1 {
@@ -82,6 +88,7 @@
         .video-section {
             text-align: center;
             margin: 30px auto;
+            width: 100%;
         }
 
         .video-section video {
@@ -96,6 +103,17 @@
             text-align: center;
             font-size: 1rem;
             color: #777;
+            width: 100%;
+        }
+
+        button {
+            margin: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
