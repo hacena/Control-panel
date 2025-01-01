@@ -17,7 +17,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             text-align: center;
         }
 
@@ -27,13 +26,73 @@
             padding: 30px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
+            margin: 20px;
         }
 
         h2 {
             color: #333;
             margin-bottom: 20px;
             font-size: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            text-align: right;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 20px;
+            color: green;
+            font-size: 1.2rem;
+        }
+
+        .activation-code-link {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .activation-code-link a {
+            display: inline-block;
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 16px;
         }
 
         .footer {
@@ -48,18 +107,65 @@
 <div class="container">
     <h2>الدفع عبر باي بال</h2>
 
-    <!-- حاوية زر PayPal -->
+    <!-- زر PayPal -->
     <div id="paypal-container-TSWWESU4ZT3UE"></div>
 
+    <!-- نموذج تأكيد الدفع -->
+    <h3 style="margin-top: 30px;">تأكيد الدفع</h3>
+    <form>
+        <div class="form-group">
+            <label for="transaction-id">رقم معاملة PayPal:</label>
+            <input type="text" id="transaction-id" placeholder="أدخل رقم المعاملة" required>
+        </div>
+
+        <div class="form-group">
+            <label for="amount-paid">المبلغ المدفوع:</label>
+            <input type="number" id="amount-paid" placeholder="أدخل المبلغ" required>
+        </div>
+
+        <div class="form-group">
+            <label for="payment-date">تاريخ الدفع:</label>
+            <input type="date" id="payment-date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="payment-receipt">ارفع وصل الدفع:</label>
+            <input type="file" id="payment-receipt" accept="image/*,application/pdf" required>
+        </div>
+
+        <button type="button" onclick="confirmPayment()">تأكيد الدفع</button>
+        <div id="success-message" class="success-message">
+            ✅ تم تأكيد عملية الدفع بنجاح!
+        </div>
+        <div id="activation-code-link" class="activation-code-link">
+            <a href="activation-code.zip" download>تحميل كود التفعيل</a>
+        </div>
+    </form>
+
     <div class="footer">
-        <p>جميع الحقوق محفوظة &copy; 2024</p>
+        <p>حقوق النشر © 2024 <a href="#">pay-now</a></p>
     </div>
 </div>
 
 <script>
-  paypal.HostedButtons({
-    hostedButtonId: "TSWWESU4ZT3UE",  // استخدم معرف الزر الخاص بك هنا
-  }).render("#paypal-container-TSWWESU4ZT3UE");
+    paypal.HostedButtons({
+        hostedButtonId: "TSWWESU4ZT3UE"
+    }).render("#paypal-container-TSWWESU4ZT3UE");
+
+    function confirmPayment() {
+        const receipt = document.getElementById('payment-receipt').files[0];
+        
+        if (!receipt) {
+            alert('يرجى رفع وصل الدفع قبل تأكيد العملية.');
+            return;
+        }
+        
+        setTimeout(() => {
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('activation-code-link').style.display = 'block';
+            console.log('تم رفع الوصل:', receipt.name);
+        }, 1000);
+    }
 </script>
 
 </body>
