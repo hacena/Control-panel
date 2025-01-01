@@ -5,10 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفعيل التطبيق</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
-        input { margin: 10px; padding: 8px; width: 80%; }
-        button { padding: 10px 20px; background-color: #4CAF50; color: white; }
-        .error { color: red; }
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 50px; 
+        }
+        input { 
+            margin: 10px; 
+            padding: 8px; 
+            width: 80%; 
+        }
+        button { 
+            padding: 10px 20px; 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error { 
+            color: red; 
+            margin-top: 10px; 
+        }
+        .success {
+            color: green;
+            margin-top: 10px;
+        }
+        #app-link {
+            margin-top: 20px;
+            display: none; /* إخفاء الرابط افتراضيًا */
+        }
+        #app-link a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -17,26 +50,41 @@
     <input type="text" id="activation-code" placeholder="أدخل كود التفعيل">
     <button onclick="activateApp()">تفعيل</button>
     <p id="error-message" class="error"></p>
+    <p id="success-message" class="success"></p>
+
+    <!-- رابط التطبيق المخفي -->
+    <div id="app-link">
+        ✅ تم التفعيل بنجاح! يمكنك الآن تحميل التطبيق:  
+        <a href="https://hacena.github.io/howtopay/" target="_blank">تحميل التطبيق</a>
+    </div>
 
     <script>
         async function activateApp() {
             const code = document.getElementById('activation-code').value;
             const userId = localStorage.getItem('userId') || 'USER123'; // معرّف المستخدم
 
-            const response = await fetch('http://localhost:3000/api/activate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ code, userId })
-            });
+            try {
+                const response = await fetch('http://localhost:3000/api/activate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code, userId })
+                });
 
-            const data = await response.json();
+                const data = await response.json();
 
-            if (data.success) {
-                localStorage.setItem('appActivated', 'true');
-                alert('✅ تم تفعيل التطبيق بنجاح!');
-                window.location.href = 'https://hacena.github.io/howtopay/';
-            } else {
-                document.getElementById('error-message').textContent = data.message;
+                if (data.success) {
+                    localStorage.setItem('appActivated', 'true');
+                    document.getElementById('error-message').textContent = '';
+                    document.getElementById('success-message').textContent = '✅ تم تفعيل التطبيق بنجاح!';
+                    
+                    // عرض رابط التطبيق بعد النجاح
+                    document.getElementById('app-link').style.display = 'block';
+                } else {
+                    document.getElementById('success-message').textContent = '';
+                    document.getElementById('error-message').textContent = data.message || '❌ كود التفعيل غير صحيح.';
+                }
+            } catch (error) {
+                document.getElementById('error-message').textContent = '❌ حدث خطأ أثناء الاتصال بالخادم.';
             }
         }
     </script>
