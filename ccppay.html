@@ -30,11 +30,56 @@
             border-radius: 8px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
         }
+        .product-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
         .product-info img {
             width: 250px;
             height: auto;
             border-radius: 8px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .product-info div {
+            width: 70%;
+        }
+        .product-info h3 {
+            font-size: 24px;
+            color: #333;
+        }
+        .payment-info {
+            background-color: #ecf0f1;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+        .payment-info h3 {
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            margin-bottom: 15px;
+            background-color: #fafafa;
+        }
+        input:focus, textarea:focus {
+            border-color: #3498db;
+            outline: none;
         }
         button {
             background-color: #3498db;
@@ -62,18 +107,11 @@
             color: #ecf0f1;
             text-decoration: none;
         }
-        .back-button {
+        .success-message {
+            display: none;
             margin-top: 20px;
-            display: inline-block;
-            background-color: #2ecc71;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            text-align: center;
-        }
-        .back-button:hover {
-            background-color: #27ae60;
+            color: green;
+            font-size: 1.2rem;
         }
     </style>
 </head>
@@ -85,71 +123,77 @@
 
 <div class="container">
     <h2>معلومات المنتج</h2>
-    <img src="product-image.jpg" alt="صورة المنتج">
-    <p>السعر: 2650 دينار جزائري</p>
+    <div class="product-info">
+        <a href="product-image.jpg" download>
+            <img src="https://drive.google.com/uc?export=view&id=product-image.png.jpg" alt="صورة المنتج">
+        </a>
+        <div>
+            <h3>اسم المنتج</h3>
+            <p>هو تطبيق لاجراءات المعاملات المالية لزبائنك و تسهيل عملك في الحصول على اموالك  من زبائنك و عملائك بطريقة سلسة و أمنة و سهلة.</p>
+            <p><strong>السعر: 2650 دينار جزائري</strong></p>
+        </div>
+    </div>
+
+    <div class="payment-info">
+        <h3>تعليمات الدفع</h3>
+        <p>لإتمام عملية الشراء، يرجى تحويل المبلغ إلى حسابك البريدي:</p>
+        <p><strong>رقم الحساب البريدي:</strong> 4264232/64</p>
+        <p><strong>اسم صاحب الحساب:</strong> عاتق حسان</p>
+        <p><strong>كيفية الدفع:</strong> قم بزيارة مكتب البريد أو استخدم خدمة بريدي موب لتحويل المبلغ.</p>
+    </div>
 
     <h2>تأكيد الدفع</h2>
-    <form id="payment-form">
-        <div>
-            <label for="transaction-id">رقم المعاملة:</label>
+    <form action="#" method="POST">
+        <div class="form-group">
+            <label for="transaction-id">رقم المعاملة (التحويل):</label>
             <input type="text" id="transaction-id" name="transaction-id" required>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="amount-paid">المبلغ المدفوع:</label>
             <input type="number" id="amount-paid" name="amount-paid" required>
         </div>
 
-        <div>
+        <div class="form-group">
             <label for="payment-date">تاريخ الدفع:</label>
             <input type="date" id="payment-date" name="payment-date" required>
         </div>
 
-        <button type="submit">إرسال تأكيد الدفع</button>
-    </form>
+        <div class="form-group">
+            <label for="payment-receipt">ارفع وصل الدفع:</label>
+            <input type="file" id="payment-receipt" name="payment-receipt" accept="image/*,application/pdf" required>
+        </div>
 
-    <a class="back-button" href="index.html">العودة إلى الصفحة الرئيسية</a>
+        <button type="button" onclick="confirmPayment()">إرسال تأكيد الدفع</button>
+        <div id="success-message" class="success-message">
+            ✅ تم تأكيد عملية الدفع بنجاح!
+        </div>
+    </form>
+</div>
+<div style="text-align: center; margin-top: 20px;">
+    <a href="sale.html" style="display: inline-block; background-color: #3498db; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: 16px; margin-top: 20px;">
+        العودة إلى صفحة البيع
+    </a>
 </div>
 
 <footer>
-    <p>حقوق النشر © 2024 <a href="#">Pay-Now</a></p>
+    <p>حقوق النشر © 2024 <a href="#">pay-now</a></p>
 </footer>
 
 <script>
-    const form = document.getElementById('payment-form');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        // جمع بيانات النموذج
-        const transactionId = document.getElementById('transaction-id').value;
-        const amountPaid = document.getElementById('amount-paid').value;
-        const paymentDate = document.getElementById('payment-date').value;
-
-        // إرسال البيانات إلى خادم
-        fetch('https://your-backend-endpoint.com/verify-payment', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                transactionId,
-                amountPaid,
-                paymentDate,
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('تم التحقق من الدفع بنجاح. شكراً!');
-                window.location.href = 'success.html';
-            } else {
-                alert('فشل التحقق من الدفع. الرجاء المحاولة مرة أخرى.');
-            }
-        })
-        .catch(error => {
-            alert('حدث خطأ أثناء التحقق. الرجاء المحاولة لاحقاً.');
-        });
-    });
+    function confirmPayment() {
+        const receipt = document.getElementById('payment-receipt').files[0];
+        
+        if (!receipt) {
+            alert('يرجى رفع وصل الدفع قبل تأكيد العملية.');
+            return;
+        }
+        
+        setTimeout(() => {
+            document.getElementById('success-message').style.display = 'block';
+            console.log('تم رفع الوصل:', receipt.name);
+        }, 1000);
+    }
 </script>
 
 </body>
