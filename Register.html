@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>التسجيل</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("aSSPQagRL8xAASAb6"); // المفتاح العام Email.js الخاص بك
+        })();
+    </script>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -75,6 +81,12 @@
             color: #2E7D32;
             font-weight: bold;
         }
+
+        .error-message {
+            margin-top: 15px;
+            color: #D32F2F;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +104,7 @@
             <button type="submit">تسجيل</button>
         </form>
         <div class="success-message" id="successMessage"></div>
+        <div class="error-message" id="errorMessage"></div>
     </div>
 
     <script>
@@ -100,16 +113,23 @@
             
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
-            
+
             if (email && password) {
-                document.getElementById('successMessage').textContent = '✅ تم إرسال رابط التفعيل إلى بريدك الإلكتروني.';
-                
-                // كود لإرسال بيانات التسجيل إلى الخادم
-                setTimeout(() => {
-                    window.location.href = 'Login.html'; // الانتقال إلى صفحة تسجيل الدخول
-                }, 2000);
-            }
-        });
-    </script>
-</body>
-</html>
+                // إنشاء كود التفعيل
+                const activationCode = Math.floor(100000 + Math.random() * 900000); 
+
+                const templateParams = {
+                    user_email: email,
+                    activation_code: activationCode
+                };
+
+                emailjs.send('service_cdrj4t7', 'template_b5ydhtr', templateParams)
+                    .then((response) => {
+                        console.log('SUCCESS!', response.status, response.text);
+                        document.getElementById('successMessage').textContent = '✅ تم إرسال كود التفعيل إلى بريدك الإلكتروني.';
+                        setTimeout(() => {
+                            window.location.href = 'Login.html';
+                        }, 3000);
+                    }, (error) => {
+                        console.error('FAILED...', error);
+                        document.getElementById('errorMessage').textContent = '❌ ح
