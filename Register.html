@@ -8,17 +8,13 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function(){
-            emailjs.init("aSSPQagRL8xAASAb6"); // المفتاح العام Email.js
+            emailjs.init("aSSPQagRL8xAASAb6");
         })();
     </script>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            margin: 0;
-            padding: 0;
             background: linear-gradient(to bottom right, #E0F7FA, #FFCDD2);
-            color: #333;
-            direction: rtl;
             text-align: right;
             display: flex;
             justify-content: center;
@@ -36,8 +32,6 @@
         }
 
         h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
             color: #4CAF50;
         }
 
@@ -46,18 +40,10 @@
             text-align: right;
         }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
         input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ddd;
             border-radius: 8px;
-            box-sizing: border-box;
         }
 
         button {
@@ -72,20 +58,14 @@
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #388E3C;
-        }
-
         .success-message {
             margin-top: 15px;
             color: #2E7D32;
-            font-weight: bold;
         }
 
         .error-message {
             margin-top: 15px;
             color: #D32F2F;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -110,7 +90,7 @@
     <script>
         document.getElementById('registerForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            
+
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
 
@@ -119,8 +99,7 @@
                 return;
             }
 
-            // توليد كود التفعيل
-            const activationCode = Math.floor(100000 + Math.random() * 900000); 
+            const activationCode = Math.floor(100000 + Math.random() * 900000);
             console.log('كود التفعيل:', activationCode);
 
             const templateParams = {
@@ -134,16 +113,17 @@
                     document.getElementById('successMessage').textContent = '✅ تم إرسال كود التفعيل إلى بريدك الإلكتروني.';
                     document.getElementById('errorMessage').textContent = '';
 
-                    // تخزين البريد وكود التفعيل في localStorage للمطابقة لاحقًا
+                    // تخزين البيانات في localStorage
                     localStorage.setItem('registeredEmail', email);
                     localStorage.setItem('activationCode', activationCode);
 
                     setTimeout(() => {
-                        window.location.href = 'activation.html'; // الانتقال إلى صفحة التفعيل
+                        window.location.href = 'activation.html';
                     }, 3000);
-                }, (error) => {
+                })
+                .catch((error) => {
                     console.error('FAILED...', error);
-                    document.getElementById('errorMessage').textContent = '❌ حدث خطأ أثناء إرسال البريد الإلكتروني. حاول مرة أخرى.';
+                    document.getElementById('errorMessage').textContent = '❌ حدث خطأ أثناء إرسال البريد الإلكتروني: ' + error.text;
                 });
         });
     </script>
