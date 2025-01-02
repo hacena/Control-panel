@@ -8,7 +8,7 @@
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
         (function(){
-            emailjs.init("aSSPQagRL8xAASAb6"); // المفتاح العام Email.js الخاص بك
+            emailjs.init("aSSPQagRL8xAASAb6"); // المفتاح العام Email.js
         })();
     </script>
     <style>
@@ -114,22 +114,38 @@
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
 
-            if (email && password) {
-                // إنشاء كود التفعيل
-                const activationCode = Math.floor(100000 + Math.random() * 900000); 
+            if (!email || !password) {
+                document.getElementById('errorMessage').textContent = '❌ يرجى إدخال البريد الإلكتروني وكلمة المرور.';
+                return;
+            }
 
-                const templateParams = {
-                    user_email: email,
-                    activation_code: activationCode
-                };
+            // توليد كود التفعيل
+            const activationCode = Math.floor(100000 + Math.random() * 900000); 
+            console.log('كود التفعيل:', activationCode);
 
-                emailjs.send('service_cdrj4t7', 'template_b5ydhtr', templateParams)
-                    .then((response) => {
-                        console.log('SUCCESS!', response.status, response.text);
-                        document.getElementById('successMessage').textContent = '✅ تم إرسال كود التفعيل إلى بريدك الإلكتروني.';
-                        setTimeout(() => {
-                            window.location.href = 'Login.html';
-                        }, 3000);
-                    }, (error) => {
-                        console.error('FAILED...', error);
-                        document.getElementById('errorMessage').textContent = '❌ ح
+            const templateParams = {
+                user_email: email,
+                activation_code: activationCode
+            };
+
+            emailjs.send('service_cdrj4t7', 'template_b5ydhtr', templateParams)
+                .then((response) => {
+                    console.log('SUCCESS!', response.status, response.text);
+                    document.getElementById('successMessage').textContent = '✅ تم إرسال كود التفعيل إلى بريدك الإلكتروني.';
+                    document.getElementById('errorMessage').textContent = '';
+
+                    // تخزين البريد وكود التفعيل في localStorage للمطابقة لاحقًا
+                    localStorage.setItem('registeredEmail', email);
+                    localStorage.setItem('activationCode', activationCode);
+
+                    setTimeout(() => {
+                        window.location.href = 'activation.html'; // الانتقال إلى صفحة التفعيل
+                    }, 3000);
+                }, (error) => {
+                    console.error('FAILED...', error);
+                    document.getElementById('errorMessage').textContent = '❌ حدث خطأ أثناء إرسال البريد الإلكتروني. حاول مرة أخرى.';
+                });
+        });
+    </script>
+</body>
+</html>
