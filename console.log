@@ -1,0 +1,12 @@
+emailjs.sendForm('service_id', 'template_id', this)
+.then(function(response) {
+    console.log('Response from server:', response);  // هنا يتم عرض الاستجابة من **Email.js**
+    alert('تم إرسال البيانات بنجاح!');
+}, function(error) {
+    console.error('Error:', error);
+    alert('حدث خطأ أثناء التسجيل. حاول مرة أخرى.');
+});
+if (!name || !email || !message) {
+    alert('الرجاء ملء جميع الحقول.');
+    return;
+}
