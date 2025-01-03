@@ -1,0 +1,156 @@
+<!-- في صفحة verifier-payment -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحقق من الدفع</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header {
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            width: 85%;
+            margin: 30px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 16px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .success-message, .activation-code-link {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .success-message {
+            color: green;
+            font-size: 1.2rem;
+        }
+        .activation-code-link a {
+            display: inline-block;
+            background-color: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>التحقق من الدفع</h1>
+</header>
+
+<div class="container">
+    <h2>تأكيد عملية الدفع</h2>
+    <form id="payment-form">
+        <div class="form-group">
+            <label for="transaction-id">رقم المعاملة:</label>
+            <input type="text" id="transaction-id" required>
+        </div>
+        <div class="form-group">
+            <label for="amount-paid">المبلغ المدفوع:</label>
+            <input type="number" id="amount-paid" required>
+        </div>
+        <div class="form-group">
+            <label for="payment-date">تاريخ الدفع:</label>
+            <input type="date" id="payment-date" required>
+        </div>
+        <div class="form-group">
+            <label for="payment-receipt">ارفع وصل الدفع:</label>
+            <input type="file" id="payment-receipt" accept="image/*,application/pdf" required>
+        </div>
+
+        <button type="button" onclick="verifyPayment()">إرسال تأكيد الدفع</button>
+
+        <div id="success-message" class="success-message">
+            ✅ تم تأكيد عملية الدفع بنجاح!
+        </div>
+        <div id="activation-code-link" class="activation-code-link">
+            <a href="https://drive.google.com/file/d/1t8InGgMsfwIlSL5eSOgvL9itZi4KYLNq/view?usp=sharing" target="_blank">تحميل كود التفعيل</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    function verifyPayment() {
+        const transactionId = document.getElementById('transaction-id').value;
+        const amountPaid = document.getElementById('amount-paid').value;
+        const paymentDate = document.getElementById('payment-date').value;
+        const receipt = document.getElementById('payment-receipt').files[0];
+
+        if (!transactionId || !amountPaid || !paymentDate || !receipt) {
+            alert('الرجاء ملء جميع الحقول وتحميل وصل الدفع.');
+            return;
+        }
+
+        // هنا يمكنك إرسال الطلب إلى الخادم للتحقق من الدفع
+        fetch('/verify-payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                transactionId,
+                amountPaid,
+                paymentDate,
+                userId: 'user123'  // يتم إضافة معرف المستخدم المناسب
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('success-message').style.display = 'block';
+                document.getElementById('activation-code-link').style.display = 'block';
+            } else {
+                alert('❌ لم يتم تأكيد الدفع');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('❌ حدث خطأ أثناء التحقق من الدفع');
+        });
+    }
+</script>
+
+</body>
+</html>
