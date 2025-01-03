@@ -1,0 +1,26 @@
+// تحقق من حالة الدفع قبل إرسال الرسالة
+app.post('/api/messages', (req, res) => {
+    const { sender, receiver, message } = req.body;
+    
+    // تحقق من الدفع للمستخدم المرسل
+    const checkPaymentQuery = 'SELECT isPaymentConfirmed FROM users WHERE username = ?';
+    
+    db.get(checkPaymentQuery, [sender], (err, row) => {
+        if (err || !row) {
+            return res.status(500).json({ success: false, message: '❌ حدث خطأ أثناء التحقق من المدفوعات' });
+        }
+        
+        if (!row.isPaymentConfirmed) {
+            return res.status(403).json({ success: false, message: '❌ لا يمكنك إرسال الرسائل قبل تأكيد الدفع' });
+        }
+        
+        // إرسال الرسالة
+        const query = 'INSERT INTO messages (sender, receiver, message) VALUES (?, ?, ?)';
+        db.run(query, [sender, receiver, message], function (err) {
+            if (err) {
+                return res.status(500).json({ success: false, message: '❌ فشل في إرسال الرسالة' });
+            }
+            res.json({ success: true, message: '✅ تم إرسال الرسالة بنجاح' });
+        });
+    });
+});
