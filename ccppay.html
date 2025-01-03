@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التحقق من الدفع</title>
+    <title>صفحة بيع عبر الحساب البريدي</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         /* نفس التصميم كما في الكود السابق */
@@ -12,12 +12,31 @@
 <body>
 
 <header>
-    <h1>التحقق من الدفع</h1>
+    <h1>أهلاً بك في صفحة البيع عبر الحساب البريدي</h1>
 </header>
 
 <div class="container">
+    <h2>معلومات المنتج</h2>
+    <div class="product-info">
+        <a href="product-image.jpg" download>
+            <img src="https://drive.google.com/uc?export=view&id=product-image.png.jpg" alt="صورة المنتج">
+        </a>
+        <div>
+            <h3>   تطبيق الدفع الإلكتروني</h3>
+            <p>هو تطبيق لاجراءات المعاملات المالية لزبائنك و تسهيل عملك في الحصول على اموالك من زبائنك و عملائك بطريقة سلسة و أمنة و سهلة.</p>
+            <p><strong>السعر: 2650 دينار جزائري</strong></p>
+        </div>
+    </div>
+
+    <div class="payment-info">
+        <h3>تعليمات الدفع</h3>
+        <p>لإتمام عملية الشراء، يرجى تحويل المبلغ إلى حسابك البريدي:</p>
+        <p><strong>رقم الحساب البريدي:</strong> 4264232/64</p>
+        <p><strong>اسم صاحب الحساب:</strong> عاتق حسان</p>
+    </div>
+
     <h2>تأكيد الدفع</h2>
-    <form id="payment-verification-form">
+    <form>
         <div class="form-group">
             <label for="transaction-id">رقم المعاملة (التحويل):</label>
             <input type="text" id="transaction-id" required>
@@ -35,14 +54,12 @@
             <input type="file" id="payment-receipt" accept="image/*,application/pdf" required>
         </div>
 
-        <button type="button" onclick="verifyPayment()">التحقق من الدفع</button>
+        <button type="button" onclick="confirmPayment()">إرسال تأكيد الدفع</button>
     </form>
+</div>
 
-    <div id="activation-code-link" class="activation-code-link">
-        <a href="https://drive.google.com/file/d/1t8InGgMsfwIlSL5eSOgvL9itZi4KYLNq/view?usp=sharing" target="_blank" download>
-            تحميل كود التفعيل
-        </a>
-    </div>
+<div style="text-align: center; margin-top: 20px;">
+    <a href="sale.html" style="background-color: #3498db; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none;">العودة إلى صفحة البيع</a>
 </div>
 
 <footer>
@@ -50,19 +67,15 @@
 </footer>
 
 <script>
-    function verifyPayment() {
-        const transactionId = document.getElementById('transaction-id').value;
-        const amountPaid = document.getElementById('amount-paid').value;
-        const paymentDate = document.getElementById('payment-date').value;
+    function confirmPayment() {
         const receipt = document.getElementById('payment-receipt').files[0];
-
-        if (!transactionId || !amountPaid || !paymentDate || !receipt) {
-            alert('يرجى ملء جميع الحقول قبل التحقق.');
+        if (!receipt) {
+            alert('يرجى رفع وصل الدفع قبل تأكيد العملية.');
             return;
         }
 
-        // في هذه المرحلة، يمكن التحقق من الدفع (هذه هي نقطة الاتصال مع الخادم للتحقق)
-        document.getElementById('activation-code-link').style.display = 'block';
+        // توجيه العميل إلى صفحة التحقق من الدفع
+        window.location.href = "verifier-payment.html";
     }
 </script>
 
