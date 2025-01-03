@@ -3,161 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة بيع عبر الحساب البريدي</title>
+    <title>التحقق من الدفع</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            direction: rtl;
-            background-color: #f4f7fa;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-        header {
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            font-size: 24px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .container {
-            width: 85%;
-            margin: 30px auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .product-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-        .product-info img {
-            width: 250px;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .product-info div {
-            width: 70%;
-        }
-        .product-info h3 {
-            font-size: 24px;
-            color: #333;
-        }
-        .payment-info {
-            background-color: #ecf0f1;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            border: 1px solid #ddd;
-        }
-        .payment-info h3 {
-            color: #3498db;
-            margin-bottom: 15px;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 5px;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-            margin-bottom: 15px;
-            background-color: #fafafa;
-        }
-        input:focus, textarea:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-        button {
-            background-color: #3498db;
-            color: white;
-            padding: 15px 25px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #2980b9;
-        }
-        footer {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        footer a {
-            color: #ecf0f1;
-            text-decoration: none;
-        }
-        .success-message {
-            display: none;
-            margin-top: 20px;
-            color: green;
-            font-size: 1.2rem;
-            text-align: center;
-        }
-        .activation-code-link {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-        }
-        .activation-code-link a {
-            display: inline-block;
-            background-color: #27ae60;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 16px;
-        }
+        /* نفس التصميم كما في الكود السابق */
     </style>
 </head>
 <body>
 
 <header>
-    <h1>أهلاً بك في صفحة البيع عبر الحساب البريدي</h1>
+    <h1>التحقق من الدفع</h1>
 </header>
 
 <div class="container">
-    <h2>معلومات المنتج</h2>
-    <div class="product-info">
-        <a href="product-image.jpg" download>
-            <img src="https://drive.google.com/uc?export=view&id=product-image.png.jpg" alt="صورة المنتج">
-        </a>
-        <div>
-            <h3>   تطبيق الدفع الإلكتروني</h3>
-            <p>هو تطبيق لاجراءات المعاملات المالية لزبائنك و تسهيل عملك في الحصول على اموالك من زبائنك و عملائك بطريقة سلسة و أمنة و سهلة.</p>
-            <p><strong>السعر: 2650 دينار جزائري</strong></p>
-        </div>
-    </div>
-
-    <div class="payment-info">
-        <h3>تعليمات الدفع</h3>
-        <p>لإتمام عملية الشراء، يرجى تحويل المبلغ إلى حسابك البريدي:</p>
-        <p><strong>رقم الحساب البريدي:</strong> 4264232/64</p>
-        <p><strong>اسم صاحب الحساب:</strong> عاتق حسان</p>
-    </div>
-
     <h2>تأكيد الدفع</h2>
-    <form>
+    <form id="payment-verification-form">
         <div class="form-group">
             <label for="transaction-id">رقم المعاملة (التحويل):</label>
             <input type="text" id="transaction-id" required>
@@ -175,20 +35,14 @@
             <input type="file" id="payment-receipt" accept="image/*,application/pdf" required>
         </div>
 
-        <button type="button" onclick="confirmPayment()">إرسال تأكيد الدفع</button>
-        <div id="success-message" class="success-message">
-            ✅ تم تأكيد عملية الدفع بنجاح!
-      </div>
-<div id="activation-code-link" class="activation-code-link">
-    <a href="https://drive.google.com/file/d/NEW_FILE_ID/view?usp=sharing" target="_blank" download>
-        تحميل كود التفعيل
-    </a>
-</div>
+        <button type="button" onclick="verifyPayment()">التحقق من الدفع</button>
+    </form>
 
-</div>
-
-<div style="text-align: center; margin-top: 20px;">
-    <a href="sale.html" style="background-color: #3498db; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none;">العودة إلى صفحة البيع</a>
+    <div id="activation-code-link" class="activation-code-link">
+        <a href="https://drive.google.com/file/d/1t8InGgMsfwIlSL5eSOgvL9itZi4KYLNq/view?usp=sharing" target="_blank" download>
+            تحميل كود التفعيل
+        </a>
+    </div>
 </div>
 
 <footer>
@@ -196,13 +50,18 @@
 </footer>
 
 <script>
-    function confirmPayment() {
+    function verifyPayment() {
+        const transactionId = document.getElementById('transaction-id').value;
+        const amountPaid = document.getElementById('amount-paid').value;
+        const paymentDate = document.getElementById('payment-date').value;
         const receipt = document.getElementById('payment-receipt').files[0];
-        if (!receipt) {
-            alert('يرجى رفع وصل الدفع قبل تأكيد العملية.');
+
+        if (!transactionId || !amountPaid || !paymentDate || !receipt) {
+            alert('يرجى ملء جميع الحقول قبل التحقق.');
             return;
         }
-        document.getElementById('success-message').style.display = 'block';
+
+        // في هذه المرحلة، يمكن التحقق من الدفع (هذه هي نقطة الاتصال مع الخادم للتحقق)
         document.getElementById('activation-code-link').style.display = 'block';
     }
 </script>
