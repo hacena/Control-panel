@@ -4,101 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تأكيد الدفع</title>
-</head>
-<body>
-    <h1>تأكيد الدفع</h1>
-    <form id="paymentForm">
-        <label for="transaction-id">رقم المعاملة:</label>
-        <input type="text" id="transaction-id" required>
-        <br>
-        <label for="amount-paid">المبلغ المدفوع:</label>
-        <input type="number" id="amount-paid" required>
-        <br>
-        <button type="submit">تأكيد الدفع</button>
-    </form>
+    <style>
+        /* إعدادات عامة */
+        body {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafc;
+        }
 
-    <script>
-        document.getElementById('paymentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const transactionId = document.getElementById('transaction-id').value;
-            const amountPaid = document.getElementById('amount-paid').value;
-
-            fetch('/api/verify-payment', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ transactionId, amountPaid })
-            })
-            .then(response => response.json())
-            .then(data => alert(data.message))
-            .catch(error => alert('حدث خطأ: ' + error));
-        });
-    </script>
-</body>
-</html>
-
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 20px;
+        header {
+            background-color: #4CAF50;
+            color: white;
             text-align: center;
+            padding: 15px 0;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
         }
 
         .info-box {
-            background-color: #ecf0f1;
-            padding: 20px;
+            background-color: #e8f5e9;
+            padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
         }
 
         .info-box p {
             font-size: 16px;
-            color: #555;
+            margin: 5px 0;
+            color: #333;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         label {
             font-size: 16px;
-            margin-bottom: 10px;
+            color: #555;
         }
 
-        input, textarea {
+        input {
             width: 100%;
             padding: 10px;
-            border-radius: 6px;
+            margin-top: 5px;
+            border-radius: 5px;
             border: 1px solid #ddd;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         button {
-            background-color: #3498db;
+            background-color: #4CAF50;
             color: white;
-            padding: 10px;
-            border-radius: 6px;
             border: none;
-            cursor: pointer;
+            padding: 10px;
             width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
         }
 
         button:hover {
-            background-color: #2980b9;
+            background-color: #388E3C;
+        }
+
+        .success-message, .error-message {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 20px;
         }
 
         .success-message {
-            display: none;
-            margin-top: 20px;
-            color: green;
-            font-size: 1.2rem;
-            text-align: center;
+            color: #2E7D32;
         }
 
         .error-message {
-            display: none;
-            margin-top: 20px;
-            color: red;
-            font-size: 1.2rem;
-            text-align: center;
+            color: #C62828;
         }
 
         .back-link {
@@ -107,22 +108,20 @@
         }
 
         .back-link a {
-            display: inline-block;
-            background-color: #27ae60;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
             text-decoration: none;
+            color: #fff;
+            background-color: #FF9800;
+            padding: 10px 20px;
+            border-radius: 5px;
         }
 
         footer {
+            text-align: center;
+            margin-top: 30px;
             background-color: #2c3e50;
             color: white;
-            text-align: center;
             padding: 10px;
-            margin-top: 30px;
         }
-
     </style>
 </head>
 <body>
@@ -162,7 +161,7 @@
 </div>
 
 <footer>
-    <p>حقوق النشر © 2024 <a href="#">pay-now</a></p>
+    <p>حقوق النشر © 2024 <a href="#" style="color: #FFD700;">pay-now</a></p>
 </footer>
 
 <script>
@@ -179,7 +178,6 @@
             transactionId: verifyTransactionId
         };
 
-        // قم بإجراء طلب AJAX (افتراضيًا، يمكن تعديل URL حسب الحاجة)
         fetch('https://your-api-endpoint.com/verify-payment', {
             method: 'POST',
             headers: {
@@ -190,11 +188,9 @@
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // إذا كانت عملية الدفع ناجحة
                 document.getElementById('success-message').style.display = 'block';
                 document.getElementById('error-message').style.display = 'none';
             } else {
-                // إذا كانت عملية الدفع غير ناجحة
                 document.getElementById('error-message').style.display = 'block';
                 document.getElementById('success-message').style.display = 'none';
             }
