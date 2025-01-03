@@ -1,0 +1,14 @@
+async function verifyCode() {
+    const code = document.getElementById('activationCode').value;
+    const response = await fetch('/verify-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code })
+    });
+    const result = await response.json();
+    if (result.valid) {
+        window.location.href = result.redirectUrl;
+    } else {
+        document.getElementById('response').innerText = 'الكود غير صالح أو منتهي الصلاحية.';
+    }
+}
