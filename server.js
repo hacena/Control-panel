@@ -1,38 +1,50 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+// تحميل متغيرات البيئة
+dotenv.config({ path: './config.env' });
+
 const app = express();
 app.use(express.json());
 
-// الاتصال بقاعدة بيانات MongoDB (افترض أنك قد قمت بتكوين MongoDB)
-mongoose.connect('mongodb://localhost:27017/activationCodesDB', {
+// ✅ الاتصال بقاعدة بيانات MongoDB
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
-    console.log('Connected to MongoDB');
+    console.log('✅ Connected to MongoDB');
 }).catch((error) => {
-    console.log('Error connecting to MongoDB:', error);
+    console.error('❌ MongoDB Connection Error:', error);
 });
 
-// تعريف نموذج الكودات
+// ✅ تعريف نموذج الكودات
 const activationCodeSchema = new mongoose.Schema({
-    code: { type: String, required: true },
+    code: { type: String, required: true, unique: true },
     userId: { type: String, required: false },
     activated: { type: Boolean, default: false },
-    isPaymentConfirmed: { type: Boolean, default: false }  // حقل جديد للتحقق من حالة الدفع
+    isPaymentConfirmed: { type: Boolean, default: false },
+    createdAt: { type: Date, default: Date.now } // تاريخ إنشاء الكود
 });
 
 const ActivationCode = mongoose.model('ActivationCode', activationCodeSchema);
 
-// API لتفعيل الكود
-app.post('/api/activate', async (req, res) => {
+/// ✅ Middleware للتحقق من المدخلات
+const validateRequest = (fields) => {
+    return (req, res, next) => {
+        for (let field of fields) {
+            if (!req.body[field]) {
+                return res.status(400).json({ success: false, message: `❌ الحقل ${field} مطلوب` });
+            }
+        }
+        next();
+    };
+};
+
+// ✅ API لتفعيل الكود
+app.post('/api/activate', validateRequest(['code', 'userId']), async (req, res) => {
     const { code, userId } = req.body;
 
-    // التحقق من المدخلات
-    if (!code || !userId) {
-        return res.status(400).json({ success: false, message: '❌ الكود و معرف المستخدم مطلوبان' });
-    }
-
-    // البحث عن الكود في قاعدة البيانات
     try {
         const activation = await ActivationCode.findOne({ code });
 
@@ -48,35 +60,33 @@ app.post('/api/activate', async (req, res) => {
             return res.status(400).json({ success: false, message: '❌ الكود مرتبط بحساب آخر' });
         }
 
-        // تحديث الكود ليكون مفعّل
-        activation.userId = userId; // ربط الكود بالمستخدم
-        activation.activated = true; // تغيير الحالة إلى مفعّل
+        // ✅ تحقق من حالة الدفع قبل التفعيل
+        if (!activation.isPaymentConfirmed) {
+            return res.status(400).json({ success: false, message: '❌ لم يتم تأكيد الدفع بعد' });
+        }
 
-        await activation.save(); // حفظ التعديلات في قاعدة البيانات
+        // ✅ تحديث حالة التفعيل
+        activation.userId = userId;
+        activation.activated = true;
+        await activation.save();
 
         res.json({ success: true, message: '✅ تم تفعيل الكود بنجاح' });
 
     } catch (error) {
-        console.error('Error during code activation:', error);
+        console.error('❌ Error during code activation:', error);
         res.status(500).json({ success: false, message: '❌ حدث خطأ في الخادم' });
     }
 });
 
-// API للتحقق من حالة الدفع
-app.post('/verify-payment', async (req, res) => {
+// ✅ API للتحقق من حالة الدفع
+app.post('/api/verify-payment', validateRequest(['transactionId', 'amountPaid', 'paymentDate', 'userId']), async (req, res) => {
     const { transactionId, amountPaid, paymentDate, userId } = req.body;
 
-    if (!transactionId || !amountPaid || !paymentDate || !userId) {
-        return res.status(400).json({ success: false, message: '❌ جميع الحقول مطلوبة' });
-    }
-
     try {
-        // يمكنك إضافة منطق للتحقق من الدفع في قاعدة البيانات
-        // في هذا المثال، نفترض أن الدفع تم تأكيده بنجاح
-        const paymentConfirmed = true; // استبدل هذا بالمنطق الفعلي للتحقق من الدفع
+        // ⚠️ إضافة منطق التحقق من الدفع حسب نظامك
+        const paymentConfirmed = true; // مثال: يُفترض أن الدفع تم بنجاح
 
         if (paymentConfirmed) {
-            // تحديث حالة الدفع في قاعدة البيانات
             await ActivationCode.updateOne(
                 { userId: userId }, 
                 { $set: { isPaymentConfirmed: true } }
@@ -84,14 +94,22 @@ app.post('/verify-payment', async (req, res) => {
 
             res.json({ success: true, message: '✅ تم تأكيد الدفع بنجاح' });
         } else {
-            res.json({ success: false, message: '❌ لم يتم تأكيد الدفع' });
+            res.status(400).json({ success: false, message: '❌ لم يتم تأكيد الدفع' });
         }
 
     } catch (error) {
-        console.error('Error during payment verification:', error);
+        console.error('❌ Error during payment verification:', error);
         res.status(500).json({ success: false, message: '❌ حدث خطأ في الخادم' });
     }
 });
 
-// بدء الخادم
-app.listen(3000, () => console.log('Server running on port 3000'));
+// ✅ مسار للتحقق من صحة الخادم
+app.get('/', (req, res) => {
+    res.send('🚀 Server is running successfully!');
+});
+
+// ✅ بدء الخادم
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
+});
