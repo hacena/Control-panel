@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</h1>    <title>الصفحة الرئيسية</title> </h1>
+    <title>الصفحة الرئيسية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* إعدادات عامة */
@@ -19,14 +19,14 @@
 
         /* الهيدر (العنوان الرئيسي) */
         header {
-            background: #2196F3; /* أزرق */
+            background: #2196F3;
             color: white;
             text-align: center;
             padding: 15px 0;
             font-size: 1.5rem;
         }
 
-        /* التنقل (القائمة العلوية) */
+        /* التنقل */
         nav {
             display: flex;
             justify-content: center;
@@ -45,7 +45,7 @@
         }
 
         nav a:hover {
-            color: #2196F3; /* أزرق */
+            color: #2196F3;
         }
 
         /* الأقسام الرئيسية */
@@ -56,7 +56,7 @@
 
         .hero h1 {
             font-size: 2.5rem;
-            color: #2196F3; /* أزرق */
+            color: #2196F3;
         }
 
         .hero p {
@@ -67,7 +67,7 @@
 
         .hero button {
             margin-top: 20px;
-            background-color: #2196F3; /* أزرق */
+            background-color: #2196F3;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -78,7 +78,7 @@
         }
 
         .hero button:hover {
-            background-color: #1976D2; /* أزرق غامق */
+            background-color: #1976D2;
         }
 
         /* قسم الفيديو */
@@ -92,24 +92,6 @@
             max-width: 700px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        /* زر البريد الإلكتروني */
-        .email-button {
-            display: block;
-            margin: 30px auto;
-            background-color: #2196F3; /* أزرق */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .email-button:hover {
-            background-color: #1976D2; /* أزرق غامق */
         }
 
         /* التذييل */
@@ -131,57 +113,29 @@
 
     <!-- شريط التنقل -->
     <nav>
-       </h1> <a href="Register.html">التسجيل</a> </h1>
-       </h1> <a href="support.html">الدعم</a> </h1>
+        <a href="Register.html">التسجيل</a>
+        <a href="support.html">الدعم</a>
     </nav>
 
     <!-- القسم الأول -->
     <section class="hero">
         <h1>أهلاً بك في أفضل منصة للتسوق الالكتروني!</h1>
         <p>سجّل الآن وابدأ رحلتك في عالم التسوق السريع والآمن.</p>
-          <button onclick="window.location.href='Register.html'">نعم، أريد شراء التطبيق</button>
-
-    </section>
-
-    <!-- القسم الثاني -->
-    <section class="hero">
-        <h1>تجربة تسوق آمنة وموثوقة</h1>
-        <p>استمتع بتجربة شراء آمنة مع أفضل خدمات الدعم.</p>
-             <button onclick="window.location.href='Register.html'">نعم، أريد شراء التطبيق</button>
-
-    </section>
-
-    <!-- القسم الثالث -->
-    <section class="hero">
-        <h1>أسعار تنافسية وخدمات ممتازة</h1>
-        <p>نضمن لك أفضل الأسعار وأعلى جودة.</p>
-            <button onclick="window.location.href='Register.html'">نعم، أريد شراء التطبيق</button>
-
+        <button onclick="window.location.href='Register.html'">نعم، أريد شراء التطبيق</button>
     </section>
 
     <!-- قسم الفيديو -->
     <section class="video-section">
-        <h2>شاهد الفيديو التوضيحي</h2>
+        <h2>📹 شاهد الفيديو التوضيحي</h2>
         <video controls>
-            <source src="video-mp4" type="video/mp4">
+            <source src="video.mp4" type="video/mp4">
             المتصفح لا يدعم تشغيل الفيديو.
         </video>
     </section>
-
-    <!-- زر البريد الإلكتروني -->
-    <button onclick="sendEmail()" class="email-button">
-        أرسل رسالة عبر البريد
-    </button>
 
     <!-- التذييل -->
     <footer>
         &copy; 2024 جميع الحقوق محفوظة
     </footer>
-
-    <script>
-        function sendEmail() {
-            window.location.href = "mailto:example@example.com?subject=استفسار&body=أرسل لي رسالتك هنا.";
-        }
-    </script>
 </body>
 </html>
