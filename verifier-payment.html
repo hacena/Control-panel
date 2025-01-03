@@ -55,6 +55,13 @@
             color: #333;
         }
 
+        .editable {
+            border: 1px solid #ccc;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
         .form-group {
             margin-bottom: 15px;
         }
@@ -133,10 +140,10 @@
 <div class="container">
     <h2>معلومات الدفع</h2>
     <div class="info-box">
-        <p><strong>رقم المعاملة:</strong> <span id="transaction-id">123456789</span></p>
-        <p><strong>المبلغ المدفوع:</strong> <span id="amount-paid">2650 دينار جزائري</span></p>
-        <p><strong>تاريخ الدفع:</strong> <span id="payment-date">01/01/2025</span></p>
-        <p><strong>وصل الدفع:</strong> <span id="receipt-status">تم تحميله بنجاح</span></p>
+        <p><strong>رقم المعاملة:</strong> <span id="transaction-id" contenteditable="true" class="editable">123456789</span></p>
+        <p><strong>المبلغ المدفوع:</strong> <span id="amount-paid" contenteditable="true" class="editable">2650 دينار جزائري</span></p>
+        <p><strong>تاريخ الدفع:</strong> <span id="payment-date" contenteditable="true" class="editable">01/01/2025</span></p>
+        <p><strong>وصل الدفع:</strong> <span id="receipt-status" contenteditable="true" class="editable">تم تحميله بنجاح</span></p>
     </div>
 
     <h3>هل جميع البيانات صحيحة؟</h3>
@@ -147,6 +154,8 @@
         </div>
 
         <button type="button" onclick="verifyPayment()">تأكيد الدفع</button>
+        <button type="button" onclick="saveChanges()">حفظ التعديلات</button>
+        
         <div id="success-message" class="success-message">
             ✅ تم تأكيد عملية الدفع بنجاح!
         </div>
@@ -173,17 +182,12 @@
             return;
         }
 
-        // إرسال الطلب إلى API للتحقق من رقم المعاملة
-        const requestData = {
-            transactionId: verifyTransactionId
-        };
-
         fetch('https://your-api-endpoint.com/verify-payment', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(requestData)
+            body: JSON.stringify({ transactionId: verifyTransactionId })
         })
         .then(response => response.json())
         .then(data => {
@@ -199,6 +203,15 @@
             console.error('حدث خطأ:', error);
             alert('حدث خطأ أثناء التحقق من الدفع.');
         });
+    }
+
+    function saveChanges() {
+        const transactionId = document.getElementById('transaction-id').innerText;
+        const amountPaid = document.getElementById('amount-paid').innerText;
+        const paymentDate = document.getElementById('payment-date').innerText;
+        const receiptStatus = document.getElementById('receipt-status').innerText;
+
+        alert(`تم حفظ التعديلات:\nرقم المعاملة: ${transactionId}\nالمبلغ المدفوع: ${amountPaid}\nتاريخ الدفع: ${paymentDate}\nوصل الدفع: ${receiptStatus}`);
     }
 </script>
 
