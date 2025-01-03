@@ -1,20 +1,15 @@
-emailjs.init('YOUR_PUBLIC_KEY'); // ضع المفتاح العام هنا
+<form id="registerForm">
+    <label for="username">اسم المستخدم:</label>
+    <input type="text" id="username" required>
+    <br>
 
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-  event.preventDefault(); // منع إعادة تحميل الصفحة
+    <label for="email">البريد الإلكتروني:</label>
+    <input type="email" id="email" required>
+    <br>
 
-  const templateParams = {
-    name: this.name.value,
-    email: this.email.value,
-    message: this.message.value
-  };
+    <label for="password">كلمة المرور:</label>
+    <input type="password" id="password" required>
+    <br>
 
-  emailjs.send(service_0gzc4or', 'template_sh7kooj', templateParams)
-    .then(function(response) {
-      alert('تم إرسال الرسالة بنجاح!');
-      console.log('نجاح:', response.status, response.text);
-    }, function(error) {
-      alert('حدث خطأ أثناء الإرسال.');
-      console.error('خطأ:', error);
-    });
-});
+    <button type="submit">تسجيل</button>
+</form>
