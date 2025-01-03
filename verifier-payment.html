@@ -4,38 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تأكيد الدفع</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>تأكيد الدفع</h1>
+    <form id="paymentForm">
+        <label for="transaction-id">رقم المعاملة:</label>
+        <input type="text" id="transaction-id" required>
+        <br>
+        <label for="amount-paid">المبلغ المدفوع:</label>
+        <input type="number" id="amount-paid" required>
+        <br>
+        <button type="submit">تأكيد الدفع</button>
+    </form>
 
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            direction: rtl;
-            background-color: #f4f7fa;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const transactionId = document.getElementById('transaction-id').value;
+            const amountPaid = document.getElementById('amount-paid').value;
 
-        header {
-            background-color: #3498db;
-            color: white;
-            text-align: center;
-            padding: 30px;
-            font-size: 24px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+            fetch('/api/verify-payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ transactionId, amountPaid })
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => alert('حدث خطأ: ' + error));
+        });
+    </script>
+</body>
+</html>
 
-        .container {
-            width: 80%;
-            max-width: 900px;
-            margin: 30px auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        h2 {
             font-size: 28px;
             color: #333;
             margin-bottom: 20px;
