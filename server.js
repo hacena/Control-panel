@@ -17,7 +17,8 @@ mongoose.connect('mongodb://localhost:27017/activationCodesDB', {
 const activationCodeSchema = new mongoose.Schema({
     code: { type: String, required: true },
     userId: { type: String, required: false },
-    activated: { type: Boolean, default: false }
+    activated: { type: Boolean, default: false },
+    isPaymentConfirmed: { type: Boolean, default: false }  // حقل جديد للتحقق من حالة الدفع
 });
 
 const ActivationCode = mongoose.model('ActivationCode', activationCodeSchema);
@@ -57,6 +58,37 @@ app.post('/api/activate', async (req, res) => {
 
     } catch (error) {
         console.error('Error during code activation:', error);
+        res.status(500).json({ success: false, message: '❌ حدث خطأ في الخادم' });
+    }
+});
+
+// API للتحقق من حالة الدفع
+app.post('/verify-payment', async (req, res) => {
+    const { transactionId, amountPaid, paymentDate, userId } = req.body;
+
+    if (!transactionId || !amountPaid || !paymentDate || !userId) {
+        return res.status(400).json({ success: false, message: '❌ جميع الحقول مطلوبة' });
+    }
+
+    try {
+        // يمكنك إضافة منطق للتحقق من الدفع في قاعدة البيانات
+        // في هذا المثال، نفترض أن الدفع تم تأكيده بنجاح
+        const paymentConfirmed = true; // استبدل هذا بالمنطق الفعلي للتحقق من الدفع
+
+        if (paymentConfirmed) {
+            // تحديث حالة الدفع في قاعدة البيانات
+            await ActivationCode.updateOne(
+                { userId: userId }, 
+                { $set: { isPaymentConfirmed: true } }
+            );
+
+            res.json({ success: true, message: '✅ تم تأكيد الدفع بنجاح' });
+        } else {
+            res.json({ success: false, message: '❌ لم يتم تأكيد الدفع' });
+        }
+
+    } catch (error) {
+        console.error('Error during payment verification:', error);
         res.status(500).json({ success: false, message: '❌ حدث خطأ في الخادم' });
     }
 });
