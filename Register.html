@@ -74,12 +74,14 @@
             margin-top: 15px;
             color: #2E7D32;
             font-weight: bold;
+            display: none;
         }
 
         .error-message {
             margin-top: 15px;
             color: #D32F2F;
             font-weight: bold;
+            display: none;
         }
     </style>
 </head>
@@ -97,35 +99,44 @@
             </div>
             <button type="submit">تسجيل</button>
         </form>
-        <div class="success-message" id="successMessage" style="display:none;">✅ تم إرسال رابط التفعيل إلى بريدك الإلكتروني.</div>
-        <div class="error-message" id="errorMessage" style="display:none;">❌ حدث خطأ أثناء التسجيل. حاول مرة أخرى.</div>
+        <div class="success-message" id="successMessage">✅ تم إرسال رابط التفعيل إلى بريدك الإلكتروني.</div>
+        <div class="error-message" id="errorMessage">❌ حدث خطأ أثناء التسجيل. حاول مرة أخرى.</div>
     </div>
 
     <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        (function(){
-            emailjs.init("KSbIXS-rat5G-opzb");
+        (function() {
+            emailjs.init("KSbIXS-rat5G-opzb"); // API Key الخاص بك
         })();
 
         document.getElementById('registerForm').addEventListener('submit', function(event) {
             event.preventDefault();
+            
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
 
-            if (email && password) {
-                emailjs.send("service_0gzc4or", "template_sh7koo", {
-                    email: email,
-                    password: password
-                })
-                .then(function(response) {
-                    document.getElementById('successMessage').style.display = 'block';
-                    setTimeout(() => {
-                        window.location.href = 'Login.html';
-                    }, 2000);
-                }, function(error) {
-                    document.getElementById('errorMessage').style.display = 'block';
-                });
+            if (!email || !password) {
+                document.getElementById('errorMessage').textContent = '❌ يرجى ملء جميع الحقول.';
+                document.getElementById('errorMessage').style.display = 'block';
+                return;
             }
+
+            emailjs.send("service_0gzc4or", "template_sh7koo", {
+                email: email,
+                password: password
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                document.getElementById('successMessage').style.display = 'block';
+                document.getElementById('errorMessage').style.display = 'none';
+                setTimeout(() => {
+                    window.location.href = 'Login.html';
+                }, 2000);
+            }, function(error) {
+                console.error('FAILED...', error);
+                document.getElementById('errorMessage').textContent = '❌ حدث خطأ أثناء التسجيل. حاول مرة أخرى.';
+                document.getElementById('errorMessage').style.display = 'block';
+            });
         });
     </script>
 </body>
