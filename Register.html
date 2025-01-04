@@ -6,14 +6,15 @@
     <title>تسجيل حساب جديد</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- النسخة الحديثة من EmailJS -->
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <!-- تحميل النسخة الحديثة من EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <script type="text/javascript">
         (function(){
-            emailjs.init("3QSMyF9j5jqfWq-c1"); // تهيئة المفتاح العام الجديد
+            emailjs.init("3QSMyF9j5jqfWq-c1"); // تهيئة المفتاح العام
         })();
     </script>
+    
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -121,9 +122,6 @@
     </div>
 
     <script>
-        // تهيئة Email.js باستخدام public key الجديد
-        emailjs.init('3QSMyF9j5jqfWq-c1'); // تم إضافة المفتاح العام هنا
-
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
