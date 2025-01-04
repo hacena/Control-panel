@@ -10,8 +10,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function(){
-            // تهيئة EmailJS باستخدام مفتاح الخدمة العام الخاص بك
-            emailjs.init("tVG2CqDf2zogDlDf1");  // استبدل بالمفتاح العام الخاص بك
+       emailjs.init("tVG2CqDf2zogDlDf1");  //
+
         })();
     </script>
     
@@ -32,52 +32,61 @@
 
         .container {
             background: #fff;
-            padding: 40px;
+            padding: 50px;
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            width: 420px;
+            width: 450px;
             text-align: center;
             border-top: 5px solid #4CAF50;
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 20px;
             color: #4CAF50;
+            font-weight: 700;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-align: right;
         }
 
         label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: bold;
-            font-size: 1.1rem;
-            color: #4CAF50;
+            font-size: 1.2rem;
+            color: #388E3C;
         }
 
         input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
+            padding: 15px;
+            border: 2px solid #ddd;
             border-radius: 8px;
             box-sizing: border-box;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #4CAF50;
+            outline: none;
         }
 
         button {
-            margin-top: 20px;
+            margin-top: 30px;
             width: 100%;
             background-color: #4CAF50;
             color: white;
-            padding: 12px;
+            padding: 15px;
             border: none;
             border-radius: 8px;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         button:hover {
@@ -95,7 +104,13 @@
             margin-top: 20px;
             color: #388E3C;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 1rem;
+            color: #4CAF50;
         }
     </style>
 </head>
@@ -119,6 +134,9 @@
         </form>
         <div class="error-message" id="errorMessage"></div>
         <div class="success-message" id="successMessage"></div>
+        <div class="footer">
+            <p>© 2025 جميع الحقوق محفوظة</p>
+        </div>
     </div>
 
     <script>
@@ -149,11 +167,11 @@
             const templateParams = {
                 user_name: username,
                 user_email: email,
-                login_link: 'https://yourdomain.com/login.html' // رابط تسجيل الدخول
+                login_link: 'https://yourdomain.com/login.html'
             };
 
             // إرسال البريد عبر EmailJS
-            emailjs.send('service_1v736jk', 'template_vfwn3na', templateParams)
+            emailjs.send('**service_1v736jk**', '**template_vfwn3na**', templateParams)
                 .then(function(response) {
                     console.log('Success:', response);
                     successMessage.textContent = '✅ تم تسجيل الحساب بنجاح! تحقق من بريدك الإلكتروني.';
