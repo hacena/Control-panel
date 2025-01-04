@@ -6,15 +6,14 @@
     <title>تسجيل حساب جديد</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- تحميل النسخة الحديثة من EmailJS -->
+    <!-- النسخة الحديثة من EmailJS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     
     <script type="text/javascript">
         (function(){
-            emailjs.init("3QSMyF9j5jqfWq-c1"); // تهيئة المفتاح العام
+            emailjs.init("3QSMyF9j5jqfWq-c1"); // تهيئة المفتاح العام الجديد
         })();
     </script>
-    
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -122,6 +121,9 @@
     </div>
 
     <script>
+        // تهيئة Email.js باستخدام public key الجديد
+        emailjs.init('3QSMyF9j5jqfWq-c1'); // تم إضافة المفتاح العام هنا
+
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -152,13 +154,14 @@
             const templateParams = {
                 user_name: username,  // اسم المستخدم
                 user_email: email,    // البريد الإلكتروني
-                user_password: password // كلمة المرور
+                user_password: password, // كلمة المرور
+                activation_link: 'https://yourdomain.com/activation?email=' + encodeURIComponent(email) // رابط التفعيل
             };
 
             // إرسال البريد الإلكتروني باستخدام القالب
             emailjs.send('service_1v736jk', 'template_vfwn3na', templateParams)
                 .then(function(response) {
-                    successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
+                    successMessage.textContent = '✅ تم تسجيل الحساب بنجاح! سيتم إرسال رمز التفعيل إلى بريدك الإلكتروني.';
                     errorMessage.textContent = '';
                     window.location.href = 'welcome.html'; // صفحة الترحيب بعد التسجيل الناجح
                 }, function(error) {
