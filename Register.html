@@ -89,37 +89,40 @@
         <div class="error-message" id="errorMessage" style="display:none;">❌ حدث خطأ أثناء التسجيل. حاول مرة أخرى.</div>
     </div>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-    <script>
-        (function() {
-            emailjs.init("g9DzapSDwZ2_ux_if"); // ✅ App Key
-        })();
+   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+    (function(){
+        emailjs.init("g9DzapSDwZ2_ux_if"); // App Key الجديد
+    })();
 
-        document.getElementById('registerForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-            if (username && email && password) {
-                emailjs.send("service_fr16kl9", "template_sh7koo", {
-                    username: username,
-                    email: email,
-                    password: password
-                })
-                .then(function(response) {
-                    document.getElementById('successMessage').style.display = 'block';
-                    setTimeout(() => {
-                        window.location.href = 'Login.html';
-                    }, 2000);
-                }, function(error) {
-                    document.getElementById('errorMessage').style.display = 'block';
-                });
-            } else {
-                document.getElementById('errorMessage').innerText = '❌ يرجى ملء جميع الحقول!';
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        if (email && password && username) {
+            emailjs.send("service_fr16kl9", "template_sh7koo", {
+                username: username,
+                email: email,
+                password: password
+            })
+            .then(function(response) {
+                document.getElementById('successMessage').style.display = 'block';
+                setTimeout(() => {
+                    window.location.href = 'Login.html';
+                }, 2000);
+            }, function(error) {
                 document.getElementById('errorMessage').style.display = 'block';
-            }
-        });
-    </script>
+                console.error("خطأ:", error);
+            });
+        } else {
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('errorMessage').innerText = '❌ يرجى ملء جميع الحقول.';
+        }
+    });
+</script>
+
 </body>
 </html>
