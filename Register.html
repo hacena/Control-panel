@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل حساب جديد</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("g9DzapSDwZ2_ux_if"); // مفتاح عام تم تهيئته
+        })();
+    </script>
     <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <style>
         body {
@@ -114,9 +119,7 @@
 
     <script>
         // تهيئة Email.js باستخدام public key
-        (function() {
-            emailjs.init('g9DzapSDwZ2_ux_if'); // تم إضافة المفتاح العام هنا
-        })();
+        emailjs.init('g9DzapSDwZ2_ux_if'); // تم إضافة المفتاح العام هنا
 
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
