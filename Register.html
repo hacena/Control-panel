@@ -150,25 +150,18 @@
                 return;
             }
 
-            // إعداد البيانات المرسلة عبر القالب
-            const templateParams = {
-                user_name: username,  // اسم المستخدم
-                user_email: email,    // البريد الإلكتروني
-                user_password: password, // كلمة المرور
-                activation_link: 'https://yourdomain.com/activate.html' // رابط التفعيل
-            };
-
-            // إرسال البريد الإلكتروني باستخدام القالب
             emailjs.send('service_1v736jk', 'template_vfwn3na', templateParams)
-                .then(function(response) {
-                    successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
-                    errorMessage.textContent = '';
-                    window.location.href = 'welcome.html'; // صفحة الترحيب بعد التسجيل الناجح
-                }, function(error) {
-                    console.error('Error:', error); // طباعة تفاصيل الخطأ في الكونسول
-                    errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني. الخطأ: ' + error.text;
-                    successMessage.textContent = '';
-                });
+    .then(function(response) {
+        console.log('Success:', response);
+        successMessage.textContent = '✅ تم تسجيل الحساب بنجاح! تحقق من بريدك الإلكتروني.';
+        errorMessage.textContent = '';
+        window.location.href = 'activate.html'; // توجيه المستخدم إلى صفحة التفعيل
+    }, function(error) {
+        console.error('Error:', error);
+        errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني. الخطأ: ' + error.text;
+        successMessage.textContent = '';
+    });
+
         });
     </script>
 </body>
