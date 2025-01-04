@@ -1,55 +1,50 @@
 const express = require('express');
-const sqlite3 = require('sqlite3').verbose();
+const SibApiV3Sdk = require('sib-api-v3-sdk');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const app = express();
-const db = new sqlite3.Database('mydatabase.db');
-app.use(express.json()); // لتفسير البيانات القادمة في هيئة JSON
+const PORT = 3000;
 
-// API للتحقق من حالة الدفع
-app.post('/api/verify-payment', (req, res) => {
-    const { userId, amountPaid } = req.body;
-    const query = 'SELECT isPaymentConfirmed FROM users WHERE id = ?';
-    
-    db.get(query, [userId], (err, row) => {
-        if (err) {
-            return res.status(500).json({ success: false, message: '❌ حدث خطأ أثناء التحقق من الدفع' });
-        }
-        if (!row) {
-            return res.status(404).json({ success: false, message: '❌ المستخدم غير موجود' });
-        }
-        if (row.isPaymentConfirmed) {
-            res.json({ success: true, message: '✅ تم تأكيد الدفع' });
-        } else {
-            res.status(400).json({ success: false, message: '❌ لم يتم تأكيد الدفع' });
-        }
+// إعداد Express
+app.use(bodyParser.json());
+app.use(cors());
+
+// إعداد مفتاح Brevo API
+let defaultClient = SibApiV3Sdk.ApiClient.instance;
+let apiKey = defaultClient.authentications['api-key'];
+apiKey.apiKey = 'YOUR_BREVO_API_KEY'; // استبدل بمفتاحك
+
+// نقطة نهاية لإرسال البريد
+app.post('/send-email', (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: '❌ البريد الإلكتروني مطلوب' });
+    }
+
+    const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
+
+    sendSmtpEmail.sender = { name: 'اسم التطبيق', email: 'your_verified_sender@email.com' };
+    sendSmtpEmail.to = [{ email: email }];
+    sendSmtpEmail.subject = 'تفعيل حسابك';
+    sendSmtpEmail.htmlContent = `
+        <h1>🔑 أهلاً بك!</h1>
+        <p>تم إنشاء حسابك بنجاح. انقر على الرابط أدناه لتفعيل حسابك:</p>
+        <a href="https://yourdomain.com/activate.html">تفعيل الحساب</a>
+    `;
+
+    apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
+        console.log('Email sent:', data);
+        res.status(200).json({ message: '✅ تم إرسال البريد الإلكتروني بنجاح!' });
+    }).catch(function(error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: '❌ فشل في إرسال البريد الإلكتروني.' });
     });
 });
 
-// API لاسترجاع الرسائل
-app.get('/api/messages', (req, res) => {
-    const query = 'SELECT * FROM messages ORDER BY createdAt DESC';
-    db.all(query, [], (err, rows) => {
-        if (err) {
-            return res.status(500).json({ success: false, message: '❌ فشل في جلب الرسائل' });
-        }
-        res.json(rows);
-    });
-});
-
-// API لإرسال رسالة جديدة
-app.post('/api/messages', (req, res) => {
-    const { sender, receiver, message } = req.body;
-    const query = 'INSERT INTO messages (sender, receiver, message) VALUES (?, ?, ?)';
-    
-    db.run(query, [sender, receiver, message], function (err) {
-        if (err) {
-            return res.status(500).json({ success: false, message: '❌ فشل في إرسال الرسالة' });
-        }
-        res.json({ success: true, message: '✅ تم إرسال الرسالة بنجاح' });
-    });
-});
-
-// إعداد الخادم
-const PORT = process.env.PORT || 3000;
+// تشغيل الخادم
 app.listen(PORT, () => {
-    console.log(`🚀 الخادم يعمل على البورت ${PORT}`);
+    console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
