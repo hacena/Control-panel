@@ -1,50 +1,41 @@
-const express = require('express');
-const SibApiV3Sdk = require('sib-api-v3-sdk');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-
+const express = require('express');const express = require('express');
+const nodemailer = require('nodemailer');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// إعداد Express
-app.use(bodyParser.json());
-app.use(cors());
+// إعداد وسطيات Express للتعامل مع JSON و URL-encoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// إعداد مفتاح Brevo API
-let defaultClient = SibApiV3Sdk.ApiClient.instance;
-let apiKey = defaultClient.authentications['api-key'];
-apiKey.apiKey = 'YOUR_BREVO_API_KEY'; // استبدل بمفتاحك
+// إعداد Nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'gmail',  // يمكنك اختيار خدمة بريد إلكتروني أخرى
+  auth: {
+    user: 'your-email@gmail.com',  // بريدك الإلكتروني
+    pass: 'your-email-password'  // كلمة المرور للبريد الإلكتروني
+  }
+});
 
-// نقطة نهاية لإرسال البريد
-app.post('/send-email', (req, res) => {
-    const { email } = req.body;
+// نقطة النهاية للتسجيل
+app.post('/register', (req, res) => {
+  const { email, username } = req.body;
 
-    if (!email) {
-        return res.status(400).json({ message: '❌ البريد الإلكتروني مطلوب' });
+  const mailOptions = {
+    from: 'your-email@gmail.com',  // البريد الذي سيتم الإرسال منه
+    to: email,  // البريد الذي سيتم إرسال الرسالة إليه
+    subject: 'Welcome to MyApp!',
+    text: `Hello ${username},\n\nThank you for registering with us!`
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).send('Error sending email: ' + error.message);
     }
-
-    const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
-
-    sendSmtpEmail.sender = { name: 'اسم التطبيق', email: 'your_verified_sender@email.com' };
-    sendSmtpEmail.to = [{ email: email }];
-    sendSmtpEmail.subject = 'تفعيل حسابك';
-    sendSmtpEmail.htmlContent = `
-        <h1>🔑 أهلاً بك!</h1>
-        <p>تم إنشاء حسابك بنجاح. انقر على الرابط أدناه لتفعيل حسابك:</p>
-        <a href="https://yourdomain.com/activate.html">تفعيل الحساب</a>
-    `;
-
-    apiInstance.sendTransacEmail(sendSmtpEmail).then(function(data) {
-        console.log('Email sent:', data);
-        res.status(200).json({ message: '✅ تم إرسال البريد الإلكتروني بنجاح!' });
-    }).catch(function(error) {
-        console.error('Error:', error);
-        res.status(500).json({ message: '❌ فشل في إرسال البريد الإلكتروني.' });
-    });
+    res.status(200).send('Registration successful! A confirmation email has been sent.');
+  });
 });
 
 // تشغيل الخادم
 app.listen(PORT, () => {
-    console.log(`🚀 Server is running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });
