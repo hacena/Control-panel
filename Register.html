@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <script type="text/javascript">
         (function(){
-            emailjs.init("g9DzapSDwZ2_ux_if"); // تهيئة المفتاح العام
+            emailjs.init("E4RFosAy66ymvwNVQ"); // تهيئة المفتاح العام الجديد
         })();
     </script>
     <!-- استخدام النسخة الصحيحة من Email.js -->
@@ -119,8 +119,8 @@
     </div>
 
     <script>
-        // تهيئة Email.js باستخدام public key
-        emailjs.init('g9DzapSDwZ2_ux_if'); // تم إضافة المفتاح العام هنا
+        // تهيئة Email.js باستخدام public key الجديد
+        emailjs.init('E4RFosAy66ymvwNVQ'); // تم إضافة المفتاح العام هنا
 
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -156,7 +156,7 @@
             };
 
             // إرسال البريد الإلكتروني باستخدام القالب
-            emailjs.send('service_vd4expq', 'template_f8sk77b', templateParams)
+            emailjs.send('service_ul97amh', 'template_f4ofw3y', templateParams)
                 .then(function(response) {
                     successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
                     errorMessage.textContent = '';
