@@ -1,61 +1,51 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مرحباً بك</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background: #E0F7FA;
-            color: #333;
-            direction: rtl;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
+<script>
+    // تهيئة Email.js باستخدام public key الجديد
+    emailjs.init('YOUR_PUBLIC_KEY'); // استبدل بـ public key الخاص بك
+
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        
+        // تحقق من تنسيق البريد الإلكتروني
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        
+        // التحقق من أن البريد الإلكتروني صالح
+        if (!email || !emailRegex.test(email)) {
+            errorMessage.textContent = '❌ البريد الإلكتروني غير صالح.';
+            successMessage.textContent = '';
+            return;
         }
 
-        .container {
-            background: #fff;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            text-align: center;
-            border-top: 5px solid #4CAF50;
+        // التحقق من أن كلمة المرور ليست فارغة
+        if (!password) {
+            errorMessage.textContent = '❌ كلمة المرور غير صحيحة.';
+            successMessage.textContent = '';
+            return;
         }
 
-        h1 {
-            color: #4CAF50;
-            font-size: 2rem;
-        }
+        // إعداد البيانات المرسلة عبر القالب
+        const templateParams = {
+            user_name: username,  // اسم المستخدم
+            user_email: email,    // البريد الإلكتروني
+            user_password: password, // كلمة المرور
+            login_link: 'https://yourdomain.com/login.html' // رابط تسجيل الدخول
+        };
 
-        p {
-            font-size: 1.1rem;
-            margin-top: 20px;
-        }
-
-        a {
-            color: #388E3C;
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>مرحباً بك في التطبيق!</h1>
-        <p>لقد تم تسجيل حسابك بنجاح. الآن يمكنك تسجيل الدخول باستخدام بياناتك.</p>
-        <a href="login.html">تسجيل الدخول الآن</a>
-    </div>
-</body>
-</html>
+        // إرسال البريد الإلكتروني باستخدام القالب
+        emailjs.send('service_1v736jk', 'template_vfwn3na', templateParams)
+            .then(function(response) {
+                successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
+                errorMessage.textContent = '';
+                window.location.href = 'welcome.html'; // توجيه العميل إلى صفحة الترحيب بعد التسجيل الناجح
+            }, function(error) {
+                console.error('Error:', error); // طباعة تفاصيل الخطأ في الكونسول
+                errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني. الخطأ: ' + error.text;
+                successMessage.textContent = '';
+            });
+    });
+</script>
