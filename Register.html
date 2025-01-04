@@ -14,9 +14,7 @@
             emailjs.init("3QSMyF9j5jqfWq-c1"); // تهيئة المفتاح العام الجديد
         })();
     </script>
-
     <style>
-        /* إضفاء طابع جمالي على صفحة التسجيل */
         body {
             font-family: 'Cairo', sans-serif;
             margin: 0;
@@ -156,16 +154,16 @@
             const templateParams = {
                 user_name: username,  // اسم المستخدم
                 user_email: email,    // البريد الإلكتروني
-                user_password: password // كلمة المرور
+                user_password: password, // كلمة المرور
+                activation_link: 'https://yourdomain.com/activate.html' // رابط التفعيل
             };
 
             // إرسال البريد الإلكتروني باستخدام القالب
             emailjs.send('service_1v736jk', 'template_vfwn3na', templateParams)
                 .then(function(response) {
                     successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
-
-                    // توجيه المستخدم إلى صفحة البريد الإلكتروني الخاص به للحصول على رابط تسجيل الدخول
-                    window.location.href = 'activate.html'; // إعادة توجيه إلى صفحة تفعيل الحساب
+                    errorMessage.textContent = '';
+                    window.location.href = 'welcome.html'; // صفحة الترحيب بعد التسجيل الناجح
                 }, function(error) {
                     console.error('Error:', error); // طباعة تفاصيل الخطأ في الكونسول
                     errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني. الخطأ: ' + error.text;
