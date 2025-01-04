@@ -114,7 +114,9 @@
 
     <script>
         // تهيئة Email.js باستخدام public key
-        emailjs.init('g9DzapSDwZ2_ux_if'); // تم إضافة المفتاح العام هنا
+        (function() {
+            emailjs.init('g9DzapSDwZ2_ux_if'); // تم إضافة المفتاح العام هنا
+        })();
 
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
