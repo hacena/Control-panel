@@ -7,10 +7,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <script type="text/javascript">
         (function(){
-            emailjs.init("g9DzapSDwZ2_ux_if"); // مفتاح عام تم تهيئته
+            emailjs.init("g9DzapSDwZ2_ux_if"); // تهيئة المفتاح العام
         })();
     </script>
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <!-- استخدام النسخة الصحيحة من Email.js -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -155,7 +156,7 @@
             };
 
             // إرسال البريد الإلكتروني باستخدام القالب
-            emailjs.send('service_fr16kl9', 'template_hilarmv', templateParams)
+            emailjs.send('service_vd4expq', 'template_f8sk77b', templateParams)
                 .then(function(response) {
                     successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
                     errorMessage.textContent = '';
