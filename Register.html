@@ -6,15 +6,6 @@
     <title>تسجيل حساب جديد</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     
-    <!-- EmailJS Library -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-       emailjs.init("tVG2CqDf2zogDlDf1");  //
-
-        })();
-    </script>
-    
     <style>
         body {
             font-family: 'Cairo', sans-serif;
@@ -163,27 +154,15 @@
                 return;
             }
 
-            // إعداد البيانات المرسلة
-            const templateParams = {
-                user_name: username,
-                user_email: email,
-                login_link: 'https://yourdomain.com/login.html'
-            };
+            // هنا يتم تنفيذ الكود لتخزين البيانات في قاعدة البيانات أو إرسالها إلى السيرفر
+            // هذه الجزئية تحتاج إلى تنفيذ فعل حقيقي من خلال API أو قاعدة بيانات
 
-            // إرسال البريد عبر EmailJS
-            emailjs.send('**service_1v736jk**', '**template_vfwn3na**', templateParams)
-                .then(function(response) {
-                    console.log('Success:', response);
-                    successMessage.textContent = '✅ تم تسجيل الحساب بنجاح! تحقق من بريدك الإلكتروني.';
-                    errorMessage.textContent = '';
-                    setTimeout(() => {
-                        window.location.href = 'activate.html'; // توجيه المستخدم إلى صفحة التفعيل
-                    }, 2000);
-                }, function(error) {
-                    console.error('Error:', error);
-                    errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني. الخطأ: ' + error.text;
-                    successMessage.textContent = '';
-                });
+            // إذا كان التسجيل ناجحًا، يتم إظهار رسالة النجاح
+            successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
+            errorMessage.textContent = '';
+            setTimeout(() => {
+                window.location.href = 'activate.html'; // توجيه المستخدم إلى صفحة التفعيل
+            }, 2000);
         });
     </script>
 </body>
