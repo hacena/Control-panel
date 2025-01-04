@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <script type="text/javascript">
         (function(){
-            emailjs.init("E4RFosAy66ymvwNVQ"); // تهيئة المفتاح العام الجديد
+            emailjs.init("3QSMyF9j5jqfWq-c1"); // تهيئة المفتاح العام الجديد
         })();
     </script>
     <!-- استخدام النسخة الصحيحة من Email.js -->
@@ -120,7 +120,7 @@
 
     <script>
         // تهيئة Email.js باستخدام public key الجديد
-        emailjs.init('E4RFosAy66ymvwNVQ'); // تم إضافة المفتاح العام هنا
+        emailjs.init('3QSMyF9j5jqfWq-c1'); // تم إضافة المفتاح العام هنا
 
         document.getElementById('signupForm').addEventListener('submit', function(event) {
             event.preventDefault();
@@ -156,14 +156,14 @@
             };
 
             // إرسال البريد الإلكتروني باستخدام القالب
-            emailjs.send('service_ul97amh', 'template_f4ofw3y', templateParams)
+            emailjs.send('service_gdkl86r', 'template_vfwn3na', templateParams)
                 .then(function(response) {
                     successMessage.textContent = '✅ تم تسجيل الحساب بنجاح!';
                     errorMessage.textContent = '';
                     window.location.href = 'welcome.html'; // صفحة الترحيب بعد التسجيل الناجح
                 }, function(error) {
                     console.error('Error:', error); // طباعة تفاصيل الخطأ في الكونسول
-                    errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني: ' + error.text;
+                    errorMessage.textContent = '❌ فشل إرسال البريد الإلكتروني. الخطأ: ' + error.text;
                     successMessage.textContent = '';
                 });
         });
