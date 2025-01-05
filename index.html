@@ -10,54 +10,59 @@
             font-family: 'Cairo', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom right, #E3F2FD, #FFEBEE);
+            background: linear-gradient(to bottom right, #80deea, #ffccbc);
             color: #333;
             direction: rtl;
             text-align: right;
+            font-size: 1.2rem; /* زيادة حجم الخط */
         }
 
         header {
             background: #4CAF50;
             color: white;
             text-align: center;
-            padding: 15px 0;
-            font-size: 1.5rem;
+            padding: 20px 0;
+            font-size: 2rem; /* زيادة حجم الخط */
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 50px auto;
-            padding: 20px;
-            background: #FFF;
+            padding: 30px;
+            background: white;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             text-align: center;
+            border: 5px solid #4CAF50; /* إضافة إطار حول الصفحة */
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem; /* زيادة حجم الخط */
             color: #4CAF50;
         }
 
         p {
-            font-size: 1.2rem;
+            font-size: 1.4rem; /* زيادة حجم الخط */
             color: #555;
             margin-bottom: 20px;
         }
 
         .payment-options {
-            margin: 30px 0;
+            margin: 40px 0;
         }
 
         .payment-options a {
             display: inline-block;
-            margin: 10px;
-            padding: 12px 25px;
-            font-size: 1.1rem;
+            margin: 15px;
+            padding: 15px 30px;
+            font-size: 1.2rem; /* زيادة حجم الخط */
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: background-color 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .payment-options .paypal {
@@ -79,72 +84,128 @@
         footer {
             text-align: center;
             margin-top: 50px;
-            font-size: 1rem;
+            font-size: 1.2rem; /* زيادة حجم الخط */
             color: #777;
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        footer ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        footer ul li a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        footer ul li a:hover {
+            color: #2c6d00;
         }
 
         /* إضافة تنسيق الفيديو */
         .video-section {
-            margin-top: 30px;
+            margin-top: 40px;
             text-align: center;
         }
+
         .video-section video {
             width: 100%;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 2px solid #4CAF50;
         }
 
         /* تنسيق نموذج الاتصال */
         .contact-section {
-            margin-top: 30px;
+            margin-top: 40px;
         }
+
         .contact-section form {
             text-align: right;
         }
+
         .contact-section input, .contact-section textarea {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 12px 0;
             border: 2px solid #4CAF50;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1.2rem; /* زيادة حجم الخط */
         }
+
         .contact-section button {
-            padding: 12px 25px;
+            padding: 15px 30px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1.2rem; /* زيادة حجم الخط */
         }
+
         .contact-section button:hover {
             background-color: #45a049;
         }
 
         /* إضافة إعدادات البريد الإلكتروني */
         .settings-section {
-            margin-top: 30px;
+            margin-top: 40px;
         }
+
         .settings-section form {
             text-align: right;
         }
+
         .settings-section input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 12px 0;
             border: 2px solid #4CAF50;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1.2rem; /* زيادة حجم الخط */
         }
+
         .settings-section button {
-            padding: 12px 25px;
+            padding: 15px 30px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1.2rem; /* زيادة حجم الخط */
         }
+
         .settings-section button:hover {
             background-color: #45a049;
         }
+
+        /* إضافة تنسيق لروابط السياسات */
+        .policies-section ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 30px;
+        }
+
+        .policies-section ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        .policies-section ul li a {
+            font-size: 1.3rem; /* زيادة حجم الخط */
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        .policies-section ul li a:hover {
+            color: #2c6d00;
+        }
+
     </style>
 </head>
 <body>
@@ -204,6 +265,15 @@
                 
                 <button type="submit">حفظ الإعدادات</button>
             </form>
+        </div>
+
+        <!-- إضافة روابط السياسات -->
+        <div class="policies-section">
+            <ul>
+                <li><a href="privacy-policy.html">سياسة الخصوصية</a></li>
+                <li><a href="terms-of-use.html">سياسة الاستخدام</a></li>
+                <li><a href="return-policy.html">سياسة الاسترجاع</a></li>
+            </ul>
         </div>
     </div>
 
