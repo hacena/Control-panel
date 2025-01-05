@@ -3,187 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الصفحة الرئيسية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>طرق الدفع</title>
     <style>
-        /* إعدادات عامة */
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: Arial, sans-serif;
+            text-align: center;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom right, #E3F2FD, #FFEBEE);
-            color: #333;
-            direction: rtl;
-            text-align: right;
+            background-color: #f9fafc;
         }
-
-        /* الهيدر (العنوان الرئيسي) */
-        header {
-            background: #2196F3; /* أزرق */
-            color: white;
-            text-align: center;
-            padding: 15px 0;
-            font-size: 1.5rem;
-        }
-
-        /* التنقل (القائمة العلوية) */
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            background: #FFF;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #333;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #2196F3; /* أزرق */
-        }
-
-        /* الأقسام الرئيسية */
-        .hero {
-            text-align: center;
-            padding: 50px 20px;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            color: #2196F3; /* أزرق */
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-            color: #555;
-        }
-
-        .hero button {
-            margin-top: 20px;
-            background-color: #2196F3; /* أزرق */
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .hero button:hover {
-            background-color: #1976D2; /* أزرق غامق */
-        }
-
-        /* قسم الفيديو */
-        .video-section {
-            text-align: center;
-            margin: 30px auto;
-        }
-
-        .video-section video {
-            width: 80%;
-            max-width: 700px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        /* زر البريد الإلكتروني */
-        .email-button {
-            display: block;
-            margin: 30px auto;
-            background-color: #2196F3; /* أزرق */
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .email-button:hover {
-            background-color: #1976D2; /* أزرق غامق */
-        }
-
-        /* التذييل */
-        footer {
+        .container {
             margin-top: 50px;
-            text-align: center;
-            font-size: 1rem;
-            color: #777;
-            background: #f9f9f9;
-            padding: 10px 0;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            margin: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .paypal-btn {
+            background-color: #0070ba;
+            color: white;
+        }
+        .ccp-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        button:hover {
+            opacity: 0.9;
         }
     </style>
 </head>
 <body>
-    <!-- الهيدر -->
-    <header>
-        مرحبًا بكم في تطبيق الدفع الإلكتروني
-    </header>
-
-    <!-- شريط التنقل -->
-    <nav>
-        <a href="Register.html">التسجيل</a>
-        <a href="sale.html">ا اختر و سيلة دفع</a>  
-        <a href="support.html">الدعم</a>
-    </nav>
-
-    <!-- القسم الأول -->
-    <section class="hero">
-        <h1>أهلاً بك في أفضل منصة للتسوق الالكتروني!</h1>
-        <p>سجّل الآن وابدأ رحلتك في عالم التسوق السريع والآمن.</p>
-        <button onclick="window.location.href='Register.html'">نعم، أريد شراء التطبيق</button>
-    </section>
-
-    <!-- القسم الثاني -->
-    <section class="hero">
-        <h1>تجربة تسوق آمنة وموثوقة</h1>
-        <p>استمتع بتجربة شراء آمنة مع أفضل خدمات الدعم.</p>
-        <button onclick="window.location.href='Register.html'">نعم، أريد شراء التطبيق</button>
-    </section>
-
-    <!-- القسم الثالث -->
-    <section class="hero">
-        <h1>أسعار تنافسية وخدمات ممتازة</h1>
-        <p>نضمن لك أفضل الأسعار وأعلى جودة.</p>
-        <button onclick="window.location.href='Register.html'">نعم، أريد شراء التطبيق</button>
-    </section>
-
-    <!-- قسم الفيديو -->
-    <section class="video-section">
-        <h2>شاهد الفيديو التوضيحي</h2>
-        <video controls>
-            <source src="video.mp4" type="video/mp4">
-            المتصفح لا يدعم تشغيل الفيديو.
-        </video>
-    </section>
-
-    <!-- زر البريد الإلكتروني -->
-    <button onclick="sendEmail()" class="email-button">
-        أرسل رسالة عبر البريد
-    </button>
-
-    <!-- التذييل -->
-     <footer>
-        &copy; 2024 جميع الحقوق محفوظة | 
-     
-        <a href="support.html">الدعم</a> |
-        <a href="contact.html">الاتصال</a> |
-        <a href="privacy.html">سياسة الخصوصية</a> |
-        <a href="terms.html">الشروط والأحكام</a>
-    </footer>
-
+    <div class="container">
+        <h1>طرق الدفع</h1>
+        <p>الرجاء اختيار طريقة الدفع المناسبة:</p>
+        <button class="paypal-btn" onclick="payWithPayPal()">💳 الدفع عبر PayPal</button>
+        <button class="ccp-btn" onclick="payWithCCP()">🏦 الدفع عبر CCP</button>
+    </div>
     <script>
-        function sendEmail() {
-            window.location.href = "mailto:example@example.com?subject=استفسار&body=أرسل لي رسالتك هنا.";
+        function payWithPayPal() {
+            window.location.href = 'https://www.paypal.com/paypalme/YourPayPalAccount';
+        }
+
+        function payWithCCP() {
+            alert('الرجاء تحويل المبلغ إلى رقم CCP: 1234567890\nالاسم: اسمك هنا');
         }
     </script>
 </body>
