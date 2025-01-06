@@ -4,15 +4,15 @@ const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'your-email@gmail.com', // استبدلها ببريدك الإلكتروني
-    pass: 'your-email-password'   // استبدلها بكلمة مرورك
+    user: 'ha2502ha@gmail.com', // بريدك الإلكتروني (استبدله ببريدك الفعلي)
+    pass: 'HA2502ha@'    // كلمة مرور البريد (استبدلها بكلمة مرورك الفعلية)
   }
 });
 
 // إعدادات البريد الإلكتروني الذي ستُرسله
 let mailOptions = {
-  from: 'your-email@gmail.com',  // من: عنوان البريد
-  to: 'recipient-email@example.com', // إلى: عنوان البريد المستلم
+  from: 'ha2502ha@gmail.com', // من: عنوان البريد (استبدله ببريدك الفعلي)
+  to: 'recipient-email@example.com', // إلى: عنوان البريد المستلم (استبدله بعنوان البريد المستلم)
   subject: 'رسالة عبر Node.js و Nodemailer', // الموضوع
   text: 'مرحبًا! هذه رسالة تم إرسالها باستخدام Node.js و Nodemailer.' // النص
 };

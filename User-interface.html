@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعدادات الدفع الخاصة بك</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #E3F2FD, #FFEBEE);
+            color: #333;
+            direction: rtl;
+            text-align: right;
+        }
+
+        header {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.5rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #FFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+        }
+
+        .button {
+            padding: 12px 25px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .payment-options {
+            margin-top: 30px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        إعدادات الدفع الخاصة بك
+    </header>
+
+    <div class="container">
+        <h1>أضف طرق الدفع الخاصة بك</h1>
+        
+        <!-- PayPal -->
+        <h2>رابط PayPal</h2>
+        <form action="save_payment_links.php" method="POST">
+            <label for="paypal_link">رابط الدفع عبر PayPal:</label>
+            <input type="text" id="paypal_link" name="paypal_link" class="input-field" placeholder="أدخل رابط PayPal">
+
+        <!-- Wise -->
+        <h2>رابط Wise</h2>
+            <label for="wise_link">رابط الدفع عبر Wise:</label>
+            <input type="text" id="wise_link" name="wise_link" class="input-field" placeholder="أدخل رابط Wise">
+
+        <!-- Payeer -->
+        <h2>رابط Payeer</h2>
+            <label for="payeer_link">رابط الدفع عبر Payeer:</label>
+            <input type="text" id="payeer_link" name="payeer_link" class="input-field" placeholder="أدخل رابط Payeer">
+
+        <!-- CCP -->
+        <h2>تفاصيل CCP</h2>
+            <label for="ccp_name">الاسم الكامل:</label>
+            <input type="text" id="ccp_name" name="ccp_name" class="input-field" placeholder="أدخل الاسم الكامل">
+
+            <label for="ccp_account">رقم الحساب CCP:</label>
+            <input type="text" id="ccp_account" name="ccp_account" class="input-field" placeholder="أدخل رقم الحساب">
+
+            <label for="ccp_amount">المبلغ المطلوب:</label>
+            <input type="number" id="ccp_amount" name="ccp_amount" class="input-field" placeholder="أدخل المبلغ">
+
+            <label for="ccp_receipt">وصل الدفع:</label>
+            <input type="file" id="ccp_receipt" name="ccp_receipt" class="input-field">
+
+        <button type="submit" class="button">حفظ الإعدادات</button>
+        </form>
+    </div>
+
+    <footer>
+        &copy; 2024 جميع الحقوق محفوظة
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إعداد صفحة البيع</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f9f9f9;
+            direction: rtl;
+            text-align: right;
+        }
+        header {
+            background: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 1.5rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #FFF;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>إعداد صفحة البيع الخاصة بك</header>
+
+<div class="container">
+    <form id="store-form">
+        <div class="form-group">
+            <label for="paypal-link">رابط PayPal الخاص بك:</label>
+            <input type="url" id="paypal-link" name="paypal-link" required placeholder="أدخل رابط PayPal الخاص بك">
+        </div>
+
+        <div class="form-group">
+            <label for="product-name">اسم المنتج:</label>
+            <input type="text" id="product-name" name="product-name" required placeholder="اسم المنتج">
+        </div>
+
+        <div class="form-group">
+            <label for="product-price">السعر:</label>
+            <input type="number" id="product-price" name="product-price" required placeholder="سعر المنتج">
+        </div>
+
+        <div class="form-group">
+            <label for="product-description">وصف المنتج:</label>
+            <textarea id="product-description" name="product-description" required placeholder="وصف المنتج"></textarea>
+        </div>
+
+        <button type="submit">حفظ البيانات</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById("store-form").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const paypalLink = document.getElementById("paypal-link").value;
+        const productName = document.getElementById("product-name").value;
+        const productPrice = document.getElementById("product-price").value;
+        const productDescription = document.getElementById("product-description").value;
+
+        // هنا يمكن إرسال البيانات إلى الخادم أو حفظها في قاعدة بيانات
+
+        alert("تم حفظ بيانات المنتج بنجاح!");
+
+        // بعد الحفظ يمكن عرض المنتج مع رابط PayPal
+        const paymentLink = `${paypalLink}?amount=${productPrice}`;
+        alert(`رابط الدفع عبر PayPal: ${paymentLink}`);
+    });
+</script>
+
+</body>
+</html>
