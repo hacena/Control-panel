@@ -1,15 +1,122 @@
-<form id="registerForm" method="POST" action="/register">
-  <label for="fullName">الاسم الكامل:</label>
-  <input type="text" id="fullName" name="fullName" required />
-  
-  <label for="email">البريد الإلكتروني:</label>
-  <input type="email" id="email" name="email" required />
-  
-  <label for="username">اسم المستخدم:</label>
-  <input type="text" id="username" name="username" required />
-  
-  <label for="password">كلمة المرور:</label>
-  <input type="password" id="password" name="password" required />
-  
-  <button type="submit">تسجيل</button>
-</form>
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل حساب جديد</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* إعدادات عامة للصفحة */
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #E3F2FD, #FFEBEE);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* الإطار الرئيسي */
+        .register-container {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            padding: 30px 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 2px solid #00897B;
+        }
+
+        /* العنوان الرئيسي */
+        .register-container h1 {
+            font-size: 2rem;
+            color: #00897B;
+            margin-bottom: 20px;
+        }
+
+        /* العبارة الترحيبية */
+        .register-container p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        /* الحقول */
+        .register-container label {
+            display: block;
+            font-size: 1.1rem;
+            text-align: right;
+            margin: 10px 0 5px;
+            font-weight: 700;
+        }
+
+        .register-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .register-container button {
+            background-color: #00897B;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .register-container button:hover {
+            background-color: #00695C;
+        }
+
+        /* تحسين على الهواتف */
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 20px;
+            }
+
+            .register-container h1 {
+                font-size: 1.5rem;
+            }
+
+            .register-container p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h1>مرحبا بك!</h1>
+        <p>سجل معنا للتعرف على مميزات التطبيق</p>
+        <form id="registerForm" method="POST" action="/register">
+            <label for="fullName">الاسم الكامل:</label>
+            <input type="text" id="fullName" name="fullName" required />
+            
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" required />
+            
+            <label for="username">اسم المستخدم:</label>
+            <input type="text" id="username" name="username" required />
+            
+            <label for="password">كلمة المرور:</label>
+            <input type="password" id="password" name="password" required />
+            
+            <button type="submit">تسجيل</button>
+        </form>
+    </div>
+
+</body>
+</html>
